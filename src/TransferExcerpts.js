@@ -80,7 +80,7 @@ const TransferExcerpts = () => {
 
                 <Row>
                     <Col md="6">
-                        Year
+                        <Form.Label>year</Form.Label>
                         <Form.Select aria-label="Default select example"  onChange={handleYearChange} >
                             {
                                 year.map((info) =>
@@ -99,6 +99,13 @@ const TransferExcerpts = () => {
                             options={refNumber}
                             onChange={handleRefNumber}
                         />
+                    </Col>
+                    <Col md="6">
+                        <Form.Label>To</Form.Label> 
+                        <Form.Select aria-label="Default select example" >
+                            <option value="mayors">Mayors Office</option>
+                            <option value="records">Records Office</option>
+                        </Form.Select>
                     </Col>
                 </Row>
                 
