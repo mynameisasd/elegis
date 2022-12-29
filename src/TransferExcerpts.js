@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react'
 import GlobalNavigation from './global_components/GlobalNavigation'
-import { Container, Row, Col, Form }  from 'react-bootstrap' 
+import { Container, Row, Col, Form, Card, Button }  from 'react-bootstrap' 
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 import axios from 'axios'
 import { ApiContext } from './App';
+import { set, useForm } from 'react-hook-form'
+
 
 
 const TransferExcerpts = () => {
 
     const currentDate = new Date().getFullYear()  //get the current date
 
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const api = useContext(ApiContext)  
     const animatedComponents = makeAnimated();
     const [ transferExcerpts, setTransferExcerpts ] = useState([{}]) 
@@ -19,12 +22,15 @@ const TransferExcerpts = () => {
 
 
     const handleRefNumber = (selectedOptions) => {
-        console.log(selectedOptions)
+
+       setTransferExcerpts(selectedOptions)
+       console.log(selectedOptions)
+
     }
 
     const handleYearChange = (e) => {
 
-    reloadRefNumber(e.target.value)
+        reloadRefNumber(e.target.value)
 
     }
 
@@ -39,6 +45,7 @@ const TransferExcerpts = () => {
         .then(function (response) {
 
           setRefNumber(response.data)
+         
          
         })
 
@@ -69,6 +76,26 @@ const TransferExcerpts = () => {
 
     }
 
+
+    //submit the form       
+    const onSubmit = (data) => {
+
+        let new_data = {
+            reference_numbers: transferExcerpts,
+            info : data
+        }
+
+      
+
+        axios.post( api.excerpts + 'transfer_excerpts.php', new_data )
+        .then(function (response) {
+
+          console.log(response.data);
+         
+        })
+
+    }
+
     return (
         <div>
             <GlobalNavigation />
@@ -80,32 +107,75 @@ const TransferExcerpts = () => {
 
                 <Row>
                     <Col md="6">
-                        <Form.Label>year</Form.Label>
-                        <Form.Select aria-label="Default select example"  onChange={handleYearChange} >
-                            {
-                                year.map((info) =>
-                                <option value={info['e_year']}>{info['e_year']}</option>
-                              )
-                            }
-                        </Form.Select>
-                        <br />
-                        <br />  
-                        Reference No.:
-                        <Select
-                            closeMenuOnSelect={false}
-                            components={animatedComponents}
-                            isSearchable={true}
-                            isMulti
-                            options={refNumber}
-                            onChange={handleRefNumber}
-                        />
+                        <Card>
+                            <Card.Body>
+                            <h2>Choose to transmit:</h2>
+                            <hr />
+                            <Form.Label>Excerpt Year</Form.Label>
+                            <Form.Select aria-label="Default select example"  onChange={handleYearChange} >
+                                {
+                                    year.map((info, index) =>
+                                    <option key={index} value={info['e_year']}>{info['e_year']}</option>
+                                    )
+                                }
+                            </Form.Select>
+                            <br />
+                            <br />  
+                            Reference No.:
+                            <Select
+                                closeMenuOnSelect={false}
+                                components={animatedComponents}
+                                isSearchable={true}
+                                isMulti
+                                options={refNumber}
+                                onChange={handleRefNumber}
+                            />
+
+                            </Card.Body>
+                        </Card>
                     </Col>
                     <Col md="6">
-                        <Form.Label>To</Form.Label> 
-                        <Form.Select aria-label="Default select example" >
-                            <option value="mayors">Mayors Office</option>
-                            <option value="records">Records Office</option>
-                        </Form.Select>
+                    <Card>
+                        <Card.Body>
+                            <h2>Transmit to:  </h2>
+                            <hr />
+                            <form onSubmit={handleSubmit(onSubmit)}>
+
+                                <Form.Label>To</Form.Label> 
+                                <Form.Select aria-label="Default select example"  {...register("transfer_to")} >
+                                    <option value="mayors">Mayors Office</option>
+                                    <option value="records">Records Office</option>
+                                </Form.Select>
+                                <br />
+                                <Form.Group className="mb-3" controlId="date_adopted">
+                                    <Form.Label>Date Adopted</Form.Label>
+                                    <Form.Control type="date" placeholder="Date Adopted" {...register("date")}  required />
+                                </Form.Group>
+                                <br />
+
+                                <Form.Label>Transfer By</Form.Label> 
+                                <Form.Select aria-label="Default select example"  {...register("transfer_by")} >
+                                    <option value="Jerick Buitizon">Jerick Buitizon</option>
+                                    <option value="Marilou P. Nifras">Marilou Nifras</option>
+                                </Form.Select>
+                                <br />
+
+                                <Form.Label>Type</Form.Label> 
+                                <Form.Select aria-label="Default select example"  {...register("type")} >
+                                    <option value="original copy">Original Copy</option>
+                                    <option value="e-copy">E-Copy</option>
+                                </Form.Select>
+                                <br />
+                                <Button variant='success' type="submit">
+                                    Submit
+                                </Button>
+                            </form>
+                            
+
+                        </Card.Body>
+                    </Card>
+
+                        
                     </Col>
                 </Row>
                 
