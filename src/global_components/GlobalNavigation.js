@@ -31,7 +31,7 @@ const GlobalNavigation = () => {
                         <Link to="/dts_archive">DTS Archive</Link>
                     </NavDropdown.Item>
                 </NavDropdown>
-              
+
                 </Nav>
                 </Container>
             </Navbar>

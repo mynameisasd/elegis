@@ -6,11 +6,13 @@ import makeAnimated from 'react-select/animated';
 import axios from 'axios'
 import { ApiContext } from './App';
 import { set, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom';
 
 
 
 const TransferExcerpts = () => {
 
+    const navigate = useNavigate()
     const currentDate = new Date().getFullYear()  //get the current date
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -85,12 +87,10 @@ const TransferExcerpts = () => {
             info : data
         }
 
-      
-
         axios.post( api.excerpts + 'transfer_excerpts.php', new_data )
         .then(function (response) {
-
-          console.log(response.data);
+          
+            navigate("/print_transmittal_excerpts/" + response.data)
          
         })
 
@@ -155,8 +155,8 @@ const TransferExcerpts = () => {
 
                                 <Form.Label>Transfer By</Form.Label> 
                                 <Form.Select aria-label="Default select example"  {...register("transfer_by")} >
-                                    <option value="Jerick Buitizon">Jerick Buitizon</option>
-                                    <option value="Marilou P. Nifras">Marilou Nifras</option>
+                                    <option value="Jerick Buitizon">Antonia A. Gonzales</option>
+                                    <option value="Marilou P. Nifras">Mark Lawrence H. Pleyto</option>
                                 </Form.Select>
                                 <br />
 

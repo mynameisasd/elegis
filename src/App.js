@@ -23,6 +23,7 @@ import DTSUpload from './DTSUpload';
 import DTSEdit from './DTSEdit';
 import EditExcerpts from './EditExcerpts';
 import TransferExcerpts from './TransferExcerpts';
+import PrintTransmittalExcerpts from './PrintTransmittalExcerpts';
 
 
 export const ApiContext = React.createContext();
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/edit_excerpts/:id"  element={<EditExcerpts /> } />
                 <Route path="/upload_excerpts/:id/:reference_number"  element={ <UploadExcerpts /> } />
                 <Route path="/transfer_excerpts"  element={ <TransferExcerpts /> } />
+                <Route path="/print_transmittal_excerpts/:series"  element={ <PrintTransmittalExcerpts /> }  />
                 <Route path="/dts_archive"  element={<DTSArchive />} />
                 <Route path="/dts_metadata/:barcode"  element={<DTSMetaData />} />
                 <Route path="/dts_add"  element={<DTSAdd /> } />
