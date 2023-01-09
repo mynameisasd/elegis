@@ -11,13 +11,16 @@ const GlobalNavigation = () => {
                 <Nav className="me-auto">
                 <NavDropdown title="Excerpts" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="#action3">
-                        <Link to="/add_excerpts">Add Excerpts</Link>
+                        <Link to="/add_excerpts">Add </Link>
                     </NavDropdown.Item>
                     <NavDropdown.Item href="#action4">
-                        <Link to="/excerpts">Excerpts Archive</Link>
+                        <Link to="/excerpts">Archive</Link>
                     </NavDropdown.Item>
                     <NavDropdown.Item href="#action4">
-                        <Link to="/transfer_excerpts">Transfer Excerpts</Link>
+                        <Link to="/transfer_excerpts">Transfer</Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action4">
+                        <Link to="/transmittal_list">Transmittal</Link>
                     </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Document Tracking" id="navbarScrollingDropdown">

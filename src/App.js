@@ -24,6 +24,8 @@ import DTSEdit from './DTSEdit';
 import EditExcerpts from './EditExcerpts';
 import TransferExcerpts from './TransferExcerpts';
 import PrintTransmittalExcerpts from './PrintTransmittalExcerpts';
+import DTSReferral from './DTSReferral';
+import TransmittalList from './TransmittalList';
 
 
 export const ApiContext = React.createContext();
@@ -49,6 +51,7 @@ function App() {
                 <Route path="/upload_excerpts/:id/:reference_number"  element={ <UploadExcerpts /> } />
                 <Route path="/transfer_excerpts"  element={ <TransferExcerpts /> } />
                 <Route path="/print_transmittal_excerpts/:series"  element={ <PrintTransmittalExcerpts /> }  />
+                <Route path="/transmittal_list"  element={ <TransmittalList /> }  />
                 <Route path="/dts_archive"  element={<DTSArchive />} />
                 <Route path="/dts_metadata/:barcode"  element={<DTSMetaData />} />
                 <Route path="/dts_add"  element={<DTSAdd /> } />
@@ -56,6 +59,7 @@ function App() {
                 <Route path="/dts_add_temp"  element={<DTSAddTemp /> } />
                 <Route path="/dts_print/:barcode"  element={<DTSPrint /> } />
                 <Route path="/dts_upload/:id/:dts"  element={<DTSUpload /> } />
+                <Route path="/dts_referral/:barcode"  element={ <DTSReferral /> } />
               </Routes>
             </div>
           </Router>
