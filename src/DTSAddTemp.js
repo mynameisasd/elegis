@@ -108,6 +108,11 @@ const DTSAddTemp = () => {
                                         <option value="Marilou Nifras">Marilou Nifras</option>
                                     </Form.Select>
                             </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="Location">
+                                <Form.Label>Location</Form.Label>
+                                <Form.Control type="text" placeholder="Location" {...register("location")} required    />
+                            </Form.Group>
                             
                         </Col>
                     </Row>

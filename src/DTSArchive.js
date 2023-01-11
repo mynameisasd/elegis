@@ -6,11 +6,13 @@ import axios from 'axios';
 import { ApiContext } from './App';
 
 
+import DocumentStatusStyle from './global_components/DocumentStatusStyle';
+
 
 const columns = [
     {
         name: 'DTS and Barcode',
-        cell:(row) => ( <div style={{padding:'15px'}}><Button size="sm" onClick={()=>window.open('/dts_metadata/' + row.barcode,'_blank')} >{row.barcode}</Button><br/><strong>DTS:</strong> { row.dts }</div>),
+        cell:(row) => ( <div style={{padding:'15px'}}><Button size="sm" onClick={()=>window.open('/dts_metadata/' + row.barcode + '/' + row.id,'_blank')} >{row.barcode}</Button><br/><strong>DTS:</strong> { row.dts }</div>),
         sortable: true,
         width:'250px'
     },
@@ -25,14 +27,13 @@ const columns = [
     },
     {
         name: 'File',
-        // selector: row => row.e_fileLink,
-        cell : (row) => ( <a href={'http://localhost/document_tracking/upload/' + row.file} target="_blank">{row.file}</a> ),
+        cell : (row) => ( <a href={'http://192.168.0.106/document_tracking/upload/' + row.file} target="_blank">{row.file}</a> ),
         sortable: true,
         width:'100px'
     },
     {
         name: 'Action Status',
-        selector: row => row.action_status,
+        selector: (row) => <DocumentStatusStyle status={row.action_status} />,
         sortable: true,
         width:'100px'
     },
@@ -47,8 +48,6 @@ const DTSArchive = () => {
     const [ dts, setDTS ] = useState([{}])
     const [ searchType, setSearchType ] = useState('dts')
     const [ search, setSearch  ] = useState('')
-
-
 
     
     useEffect(()=>{
@@ -102,8 +101,6 @@ const DTSArchive = () => {
         })
 
     }
-
-    
 
 
     return (

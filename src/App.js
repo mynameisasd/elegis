@@ -31,8 +31,8 @@ import TransmittalList from './TransmittalList';
 export const ApiContext = React.createContext();
 
 const api = {
-  excerpts: 'http://localhost/excerpts/' ,
-  dts: 'http://localhost/document_tracking/'
+  excerpts: 'http://192.168.0.106/excerpts/' ,
+  dts: 'http://192.168.0.106/document_tracking/'
 }
 
 
@@ -53,13 +53,13 @@ function App() {
                 <Route path="/print_transmittal_excerpts/:series"  element={ <PrintTransmittalExcerpts /> }  />
                 <Route path="/transmittal_list"  element={ <TransmittalList /> }  />
                 <Route path="/dts_archive"  element={<DTSArchive />} />
-                <Route path="/dts_metadata/:barcode"  element={<DTSMetaData />} />
+                <Route path="/dts_metadata/:barcode/:id"  element={<DTSMetaData />} />
                 <Route path="/dts_add"  element={<DTSAdd /> } />
                 <Route path="/dts_edit/:barcode"  element={<DTSEdit /> } />
                 <Route path="/dts_add_temp"  element={<DTSAddTemp /> } />
                 <Route path="/dts_print/:barcode"  element={<DTSPrint /> } />
                 <Route path="/dts_upload/:id/:dts"  element={<DTSUpload /> } />
-                <Route path="/dts_referral/:barcode"  element={ <DTSReferral /> } />
+                <Route path="/dts_referral/:id/:dts/:barcode"  element={ <DTSReferral /> } />
               </Routes>
             </div>
           </Router>

@@ -54,7 +54,7 @@ const PrintTransmittalExcerpts = () => {
             </table>
         <br/>
         <div style={{'text-align':'left'}}>
-            <small style={{'font-size':'12px'}}>08/30/2023</small><br/>
+            <small style={{'font-size':'12px'}}>{ generalInfo['date'] }</small><br/>
             <small style={{'font-size':'12px'}}><strong>{ generalInfo['office'] == 'mayors' ? 'HON. CHRISTIAN V. RODRIGUEZ' : 'Sharmaine C. Tojon' }</strong></small><br/>
             <small style={{'font-size':'12px'}}>{ generalInfo['office'] == 'mayors' ? 'Municipal Mayor' : 'Records Officer I' }</small><br/>
             <small style={{'font-size':'12px'}}>{ generalInfo['office'] == 'mayors' ? 'This Municipality' : '' }</small><br/>

@@ -1,18 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Tab, Tabs, Button  } from 'react-bootstrap'
+import { Container, Row, Col, Tab, Tabs, Button, Table, ListGroup  } from 'react-bootstrap'
 import { useParams, Link } from 'react-router-dom';
 import Barcode from 'react-barcode'
 import axios from 'axios'
 import { AiFillPrinter, AiOutlineUpload, AiFillEdit } from "react-icons/ai"
 import { ApiContext } from './App';
+import DisplayReferral from './global_components/DisplayReferral';
+import { AiTwotonePushpin } from "react-icons/ai";
+
 
 
 
 const DTSMetaData = () => {
 
     const api = useContext(ApiContext)
-    const { barcode } = useParams();
+    const { barcode, id } = useParams();
     const [ metadata, setMetadata ] = useState([{}])
+    const [ referral, setReferral ] = useState([{}])
 
     let data = {
 
@@ -25,12 +29,33 @@ const DTSMetaData = () => {
         .then(function (response) {
     
             setMetadata(response.data)
-            console.log(response.data)
 
         })
 
+        
+
     },[])
 
+    useEffect( ()=> {
+
+        let ref_data = {
+            'dts_id' : id
+        }
+
+        axios.post( api.dts + 'get_referral.php', ref_data )
+        .then(function (response) {
+    
+            setReferral(response.data)
+
+        })
+        
+    },[referral])
+    
+
+    if( Object.keys(referral).length === 0 )
+    {
+        alert('true')
+    }
 
     return (
         <div>
@@ -43,7 +68,9 @@ const DTSMetaData = () => {
                         </div>
                     </Col>
                 </Row>
+
                 <br />
+
                 <Row>
                     <Col md="1" className='text-right'>
                         <h6>DTS:</h6>
@@ -52,6 +79,7 @@ const DTSMetaData = () => {
                         <h6>{metadata[0]['dts']}</h6>
                     </Col>
                 </Row>
+
                 <Row>
                     <Col md="1" className='text-right'>
                         <h6>Barcode:</h6>
@@ -65,16 +93,20 @@ const DTSMetaData = () => {
                     <Col md="2">
                         <div className='text-right'>
                             <Button style={{'width':'100%'}} variant="info" size="sm" ><Link target={'_blank'} style={{'color':'white',  'text-decoration':'none'}} to={"/dts_print/" + barcode}><AiFillPrinter style={{'float':'left'}}/>print</Link></Button>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                             <Button size="sm" style={{'width':'100%'}}><Link target={'_blank'} to={"/dts_upload/" + metadata[0]['id'] + '/' + metadata[0]['dts']} style={{'color':'white',  'text-decoration':'none'}} > <AiOutlineUpload style={{'float':'left'}} /> upload file</Link></Button>
                             <br />
                             <br />
                             <Button size="sm" style={{'width':'100%'}}><Link target={'_blank'} to={"/dts_edit/" + metadata[0]['barcode']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'left'}} /> edit</Link></Button>
-
+                            <br />
+                            <br />
+                            <Button size="sm" disabled={ Object.keys(referral).length === 0 ? true : '' } style={{'width':'100%'}}><Link target={'_blank'} to={"/dts_referral/" + metadata[0]['id']+ "/" + metadata[0]['dts'] + "/" + metadata[0]['barcode']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'left'}} /> referral</Link></Button>
                         </div>
                     </Col>
                 </Row>
+                <br/>
+                <br/>
                 <Row>
                     <Col md="1" className='text-right'>
                         <h6>Subject:</h6>
@@ -148,13 +180,37 @@ const DTSMetaData = () => {
                                         {metadata[0].received_by}
                                     </Col>
                                 </Row>
+
+                                <Row>
+                                    <Col md="2" className='text-right'>
+                                        Location:
+                                    </Col>
+                                    <Col md="10" className='text-left'>
+                                        {metadata[0].location}
+                                    </Col>
+                                </Row>
                                 
                             </Tab>
                             <Tab eventKey="file" title="File">
                                <a href={api.dts + 'upload/' + metadata[0]['file']} target="_blank">{metadata[0]['file']}</a>
                             </Tab>
                             <Tab eventKey="action_taken" title="Action Taken" >
-                               Tab 3
+                                <Row>
+                                    <Col md="4"></Col>
+                                    <Col>
+                                        <h5>Referral</h5>
+                                        <hr />
+                                        <h6 style={{'text-align':'left'}}>Date Referred: {referral[0]['date_referred']}</h6>
+                                        {
+                                            referral.map((row, index )=>
+                                                <div>  <DisplayReferral  committee_id={row.committee_id} /> </div>
+                                            ) 
+                                        }
+                                    </Col>
+                                    <Col md="4"></Col>
+                                </Row>
+                               
+
                             </Tab>
                         </Tabs>
                     </Col>

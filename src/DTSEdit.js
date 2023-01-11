@@ -51,6 +51,7 @@ const DTSEdit = () => {
             setValue('contact_person',data[0]['contact_person'])
             setValue('action_status',data[0]['action_status'])
             setValue('received_by',data[0]['received_by'])
+            setValue('location', data[0]['location'])
             
 
         })
@@ -127,6 +128,11 @@ const DTSEdit = () => {
                                     <option  value="Acted">Acted</option>
                                     <option value="Acted and Transfered">Acted and Transfered</option>
                                 </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="location">
+                                <Form.Label>Location</Form.Label>
+                                <Form.Control type="text"  placeholder="Location" {...register("location")} required    />
                             </Form.Group>
                             
                         </Col>

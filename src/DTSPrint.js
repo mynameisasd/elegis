@@ -138,7 +138,7 @@ const DTSPrint = () => {
                     <td style={{'border':'1px solid black'}}></td>
                 </tr>
                 <tr style={{'border':'1px solid black', 'height':'100px'}}>
-                    <td></td>
+                    <td style={{'text-align':'left'}}><small style={{'font-size':'12px'}}>{DTSInfo[0]['remarks']}</small></td>
                 </tr>
                 <tr style={{"border":'1px solid black', 'width':'100%'}}>
                     <td style={{'text-align':'left', 'padding':'5px', 'font-size':'12px'}}>Records Section</td>

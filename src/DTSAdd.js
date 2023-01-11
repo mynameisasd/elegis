@@ -102,6 +102,11 @@ const DTSAdd = () => {
                                         <option value="Marilou Nifras">Marilou Nifras</option>
                                     </Form.Select>
                             </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="Contact Person">
+                                <Form.Label>Location</Form.Label>
+                                <Form.Control type="text" placeholder="Location" {...register("location")} required    />
+                            </Form.Group>
                             
                         </Col>
                     </Row>

@@ -25,7 +25,7 @@ const columns = [
     },
     {
         name: 'File',
-        cell : (row) => ( <a href={'http://localhost/excerpts/upload/' + row.e_fileLink} target="_blank">{row.e_fileLink}</a> ),
+        cell : (row) => ( <a href={'http://192.168.0.106/excerpts/upload/' + row.e_fileLink} target="_blank">{row.e_fileLink}</a> ),
         sortable: true,
         width:'100px'
     },
