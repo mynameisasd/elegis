@@ -9,7 +9,12 @@ body{
   height: 40vmin;
   pointer-events: none;
 }
-
+.color-white
+{
+  color:rgb(0 208 255);
+  text-decoration: none;
+  text-align: center;
+}
 .link-style
 {
   text-decoration: none !important;

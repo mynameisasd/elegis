@@ -2,6 +2,9 @@ import React from 'react'
 import { Container , Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import { AiFillFileAdd } from "react-icons/ai";
+import { BsFillArchiveFill, BsFillForwardFill, BsCardList } from 'react-icons/bs'
+
 const GlobalNavigation = () => {
     return (
         <div>
@@ -11,27 +14,37 @@ const GlobalNavigation = () => {
                 <Nav className="me-auto">
                 <NavDropdown title="Excerpts" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="#action3">
-                        <Link to="/add_excerpts">Add </Link>
+                        <Link className='color-white' to="/add_excerpts">Add < AiFillFileAdd style={{'font-size':'20px', 'float':'right', 'color':'black'}} /> </Link>
                     </NavDropdown.Item>
+                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action4">
-                        <Link to="/excerpts">Archive</Link>
+                        <Link className='color-white' to="/excerpts">Archive <BsFillArchiveFill  style={{'font-size':'20px', 'float':'right', 'color':'black'}} /></Link>
                     </NavDropdown.Item>
+                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action4">
-                        <Link to="/transfer_excerpts">Transfer</Link>
+                        <Link className='color-white' to="/transfer_excerpts">Transfer <BsFillForwardFill style={{'font-size':'20px', 'float':'right', 'color':'black'}} /> </Link>
                     </NavDropdown.Item>
+                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action4">
-                        <Link to="/transmittal_list">Transmittal</Link>
+                        <Link className='color-white' to="/transmittal_list">Transmittal <BsCardList style={{'font-size':'20px', 'float':'right', 'color':'black'}}  /></Link>
                     </NavDropdown.Item>
+                    
                 </NavDropdown>
                 <NavDropdown title="Document Tracking" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="#action3">
-                        <Link to="/dts_add">Add Dts</Link>
+                        <Link className='color-white' to="/dts_add_temp">Add Temporary</Link>
                     </NavDropdown.Item>
+                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action3">
-                        <Link to="/dts_add_temp">Add Dts Temporary</Link>
+                        <Link className='color-white' to="/dts_add">Add < AiFillFileAdd style={{'font-size':'20px', 'float':'right', 'color':'black'}} /></Link>
                     </NavDropdown.Item>
+                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action4">
-                        <Link to="/dts_archive">DTS Archive</Link>
+                        <Link className='color-white' to="/dts_archive">Archive <BsFillArchiveFill  style={{'font-size':'20px', 'float':'right', 'color':'black'}} /></Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action5">
+                        <Link className='color-white' to="/dts_bulk_transfer">Transfer <BsFillForwardFill style={{'font-size':'20px', 'float':'right', 'color':'black'}} /></Link>
                     </NavDropdown.Item>
                 </NavDropdown>
 

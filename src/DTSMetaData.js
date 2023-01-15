@@ -17,6 +17,8 @@ const DTSMetaData = () => {
     const { barcode, id } = useParams();
     const [ metadata, setMetadata ] = useState([{}])
     const [ referral, setReferral ] = useState([{}])
+    const [ transferrredInfo, setTransferredInfo ] = useState([{}])  
+    const [ additionalFile, setAdditionalFile ] = useState([{}])
 
     let data = {
 
@@ -38,6 +40,7 @@ const DTSMetaData = () => {
 
     useEffect( ()=> {
 
+        //referrals
         let ref_data = {
             'dts_id' : id
         }
@@ -48,14 +51,50 @@ const DTSMetaData = () => {
             setReferral(response.data)
 
         })
-        
-    },[referral])
-    
 
-    if( Object.keys(referral).length === 0 )
-    {
-        alert('true')
+
+        //transferred documents
+        let transferred_dts = {
+            'barcode' : barcode
+        }
+
+        axios.post( api.dts + 'get_transferred_info.php', transferred_dts )
+        .then(function (response) {
+    
+            setTransferredInfo(response.data)
+
+        })
+
+
+         //additional Files
+         let additional_files = {
+            'barcode' : barcode
+        }
+
+        axios.post( api.dts + 'get_additional_files.php', additional_files )
+        .then(function (response) {
+    
+            console.log(response.data)
+            setAdditionalFile(response.data)
+
+        })
+        
+    },[])
+    
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+    
+        return [year, month, day].join('-');
     }
+     
 
     return (
         <div>
@@ -92,16 +131,20 @@ const DTSMetaData = () => {
                     </Col>
                     <Col md="2">
                         <div className='text-right'>
-                            <Button style={{'width':'100%'}} variant="info" size="sm" ><Link target={'_blank'} style={{'color':'white',  'text-decoration':'none'}} to={"/dts_print/" + barcode}><AiFillPrinter style={{'float':'left'}}/>print</Link></Button>
+                            <Button style={{'width':'100%', 'text-align':'left'}} variant="info" size="sm" ><Link target={'_blank'} style={{'color':'white',  'text-decoration':'none'}} to={"/dts_print/" + barcode}><AiFillPrinter style={{'float':'right', 'font-size':'20px'}}/>PRINT</Link></Button>
                             <br />
                             <br />
-                            <Button size="sm" style={{'width':'100%'}}><Link target={'_blank'} to={"/dts_upload/" + metadata[0]['id'] + '/' + metadata[0]['dts']} style={{'color':'white',  'text-decoration':'none'}} > <AiOutlineUpload style={{'float':'left'}} /> upload file</Link></Button>
+                            <Button size="sm" variant="info" style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_upload/" + metadata[0]['id'] + '/' + metadata[0]['dts']} style={{'color':'white',  'text-decoration':'none'}} > <AiOutlineUpload style={{'float':'right','font-size':'20px'}} />   UPLOAD FILE</Link></Button>
                             <br />
                             <br />
-                            <Button size="sm" style={{'width':'100%'}}><Link target={'_blank'} to={"/dts_edit/" + metadata[0]['barcode']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'left'}} /> edit</Link></Button>
+                            <Button size="sm" variant="info" style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_edit/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> EDIT</Link></Button>
                             <br />
                             <br />
-                            <Button size="sm" disabled={ Object.keys(referral).length === 0 ? true : '' } style={{'width':'100%'}}><Link target={'_blank'} to={"/dts_referral/" + metadata[0]['id']+ "/" + metadata[0]['dts'] + "/" + metadata[0]['barcode']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'left'}} /> referral</Link></Button>
+                            <Button size="sm" variant="info"  disabled={ Object.keys(referral).length  > 0 ? true : '' } style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_referral/" + metadata[0]['id']+ "/" + metadata[0]['dts'] + "/" + metadata[0]['barcode']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> REFERRAL</Link></Button>
+                            <br />
+                            <br />
+                            <Button size="sm" variant="info" style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_additional_file/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} />ADDITIONAL FILE</Link></Button>
+                            
                         </div>
                     </Col>
                 </Row>
@@ -198,17 +241,63 @@ const DTSMetaData = () => {
                                 <Row>
                                     <Col md="4"></Col>
                                     <Col>
-                                        <h5>Referral</h5>
-                                        <hr />
-                                        <h6 style={{'text-align':'left'}}>Date Referred: {referral[0]['date_referred']}</h6>
+                                        
+                                        
+                                        {
+                                             Object.keys(referral).length > 0 ? <div><h5>Referral</h5><h6 style={{'text-align':'left'}}>Date Referred: {referral[0]['date_referred']}</h6></div>: ''
+                                        }
+                                        
                                         {
                                             referral.map((row, index )=>
                                                 <div>  <DisplayReferral  committee_id={row.committee_id} /> </div>
                                             ) 
                                         }
+                                        <hr />
                                     </Col>
                                     <Col md="4"></Col>
                                 </Row>
+
+                                
+                                <Row>
+                                    <Col md="4"></Col>
+                                    <Col>
+                                        {
+                                             Object.keys(additionalFile).length > 0 ? <div><h5>Additional File/Files</h5></div>: ''
+                                        }
+                                       {
+                                        additionalFile.map((row, index)=>
+                                            <ListGroup key={index}>
+                                                <ListGroup.Item>
+                                                    <p>Date: {row.date}</p>
+                                                    <p>Remarks: {row.remarks}</p>
+                                                    <p>File: <a href={'http://192.168.0.106/document_tracking/upload/' + row.file_name} target="_blank">{row.file_name}</a> </p>
+                                                </ListGroup.Item>
+                                            </ListGroup>
+                                        )
+                                       }
+                                    </Col>
+                                    <Col md="4"></Col>
+                                </Row>
+
+
+                                <Row>
+                                    <Col md="4"></Col>
+                                    <Col>
+                                        
+                                       {
+                                        transferrredInfo.map((row, index)=>
+                                            <div key={index}>
+                                                <p>Transferred on: {row.date}</p>
+                                                <p>Series: <Link  target="_blank" to={"/dts_bulk_transfer_print/" + row.series + '/' + row.by + '/' + formatDate(row.date)}  >{row.series} </Link></p>
+                                               
+                                            </div>
+                                        )
+                                       }
+                                       <hr />
+                                    </Col>
+                                    <Col md="4"></Col>
+                                </Row>
+
                                
 
                             </Tab>

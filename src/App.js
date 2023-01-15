@@ -26,6 +26,10 @@ import TransferExcerpts from './TransferExcerpts';
 import PrintTransmittalExcerpts from './PrintTransmittalExcerpts';
 import DTSReferral from './DTSReferral';
 import TransmittalList from './TransmittalList';
+import DTSBulkTransfer from './DTSBulkTransfer';
+import DTSAdditionalFile from './DTSAdditionalFile';
+import DTSPrintBulkTransfer from './DTSPrintBulkTransfer';
+import DTSTransmittalList from './DTSTransmittalList';
 
 
 export const ApiContext = React.createContext();
@@ -55,11 +59,16 @@ function App() {
                 <Route path="/dts_archive"  element={<DTSArchive />} />
                 <Route path="/dts_metadata/:barcode/:id"  element={<DTSMetaData />} />
                 <Route path="/dts_add"  element={<DTSAdd /> } />
-                <Route path="/dts_edit/:barcode"  element={<DTSEdit /> } />
+                <Route path="/dts_edit/:barcode/:id"  element={<DTSEdit /> } />
                 <Route path="/dts_add_temp"  element={<DTSAddTemp /> } />
                 <Route path="/dts_print/:barcode"  element={<DTSPrint /> } />
                 <Route path="/dts_upload/:id/:dts"  element={<DTSUpload /> } />
                 <Route path="/dts_referral/:id/:dts/:barcode"  element={ <DTSReferral /> } />
+                <Route path="/dts_bulk_transfer"  element={ <DTSBulkTransfer /> } />
+                <Route path="/dts_bulk_transfer_print/:series/:transferred_by/:date"  element={ <DTSPrintBulkTransfer /> } />
+                <Route path="/dts_additional_file/:barcode/:id"  element={ <DTSAdditionalFile /> } />
+                <Route path="/dts_transmittal_list"  element={ <DTSTransmittalList /> } />
+
               </Routes>
             </div>
           </Router>

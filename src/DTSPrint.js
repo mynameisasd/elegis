@@ -99,7 +99,7 @@ const DTSPrint = () => {
                         Subject:
                     </td>
                     <td style={{'text-align':'left', 'width': '80%', 'font-size':'12px'}}>
-                        {DTSInfo[0]['subject']}
+                        <strong> {DTSInfo[0]['subject']}</strong>
                     </td>
                 </tr>
                 <tr>

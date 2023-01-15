@@ -11,7 +11,7 @@ import { ApiContext } from './App';
 
 const DTSEdit = () => {
 
-    const { barcode } = useParams()
+    const { barcode, id } = useParams()
     const navigate = useNavigate()
     const api = useContext(ApiContext)
     const { register, handleSubmit, watch, setValue , formState: { errors } } = useForm();
@@ -23,7 +23,7 @@ const DTSEdit = () => {
         axios.post( api.dts + 'edit_dts.php', data )
         .then(function (response) {
     
-            navigate('/dts_metadata/' + barcode)
+            navigate('/dts_metadata/' + barcode + '/' + id)
 
         })
        
