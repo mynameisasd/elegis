@@ -9,6 +9,13 @@ body{
   height: 40vmin;
   pointer-events: none;
 }
+.excerpts-metadata-title
+{
+  COLOR: WHITE;
+  BACKGROUND: green;
+  padding: 15px;
+  text-align: left;
+}
 .color-white
 {
   color:rgb(0 208 255);

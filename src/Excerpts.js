@@ -10,7 +10,9 @@ import { Link } from 'react-router-dom';
 const columns = [
     {
         name: 'Reference No.',
-        selector: row => row.e_referenceNumber,
+        cell: (row) => (
+            <div><Link target={"_blank"} to={"/excerpts_metadata/" + row.e_id} >{row.e_referenceNumber}</Link></div>
+        ),
         sortable: true,
         width:'100px'
     },

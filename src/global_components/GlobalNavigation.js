@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Container , Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import { AiFillFileAdd } from "react-icons/ai";
 import { BsFillArchiveFill, BsFillForwardFill, BsCardList } from 'react-icons/bs'
+import { ApiContext } from '../App';
 
 const GlobalNavigation = () => {
+
+    const api = useContext(ApiContext)
+
     return (
         <div>
             <Navbar bg="light" variant="light">
                 <Container>
-                <Navbar.Brand href="#home">E-Legis v2</Navbar.Brand>
+                <Navbar.Brand href="#home"><img style={{'width':'50px','display':'inline-block'}} src={api.dts + '/img/SBLOGO2019.png'} /><Link className='color-white' to="/dashboard"><strong>E-Legis v2</strong></Link></Navbar.Brand>
                 <Nav className="me-auto">
                 <NavDropdown title="Excerpts" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="#action3">

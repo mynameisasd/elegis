@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { ApiContext } from './App'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 
 const EditExcerpts = () => {
@@ -12,6 +12,7 @@ const EditExcerpts = () => {
     const { id } = useParams()
     const api = useContext(ApiContext);
     const { register, handleSubmit, watch, setValue,  formState: { errors } }  = useForm()
+    const navigate = useNavigate()
 
 
     const onSubmit = (data) => {
@@ -20,7 +21,7 @@ const EditExcerpts = () => {
         axios.post( api.excerpts + 'edit_excerpts.php', data)
         .then(function (response) {
     
-            console.log(response.data)
+            navigate("/excerpts")
 
         })
 

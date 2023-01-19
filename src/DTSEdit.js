@@ -52,7 +52,6 @@ const DTSEdit = () => {
             setValue('action_status',data[0]['action_status'])
             setValue('received_by',data[0]['received_by'])
             setValue('location', data[0]['location'])
-            
 
         })
 

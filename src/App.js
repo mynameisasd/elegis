@@ -30,6 +30,9 @@ import DTSBulkTransfer from './DTSBulkTransfer';
 import DTSAdditionalFile from './DTSAdditionalFile';
 import DTSPrintBulkTransfer from './DTSPrintBulkTransfer';
 import DTSTransmittalList from './DTSTransmittalList';
+import Dashboard from './Dashboard';
+import ExcerptsMetaData from './ExcerptsMetaData';
+import ExcerptsSource from './ExcerptsSource';
 
 
 export const ApiContext = React.createContext();
@@ -49,8 +52,11 @@ function App() {
             <div>
               <Routes basename="/"> 
                 <Route path="/"  element={<Login />} />
+                <Route path="/dashboard"  element={ <Dashboard /> } />
                 <Route path="/excerpts"  element={<Excerpts />} />
                 <Route path="/add_excerpts"  element={<AddExcerpts />} />
+                <Route path="/excerpts_metadata/:id"  element={<ExcerptsMetaData />} />
+                <Route path="/excerpts_source/:id/:reference_number"  element={<ExcerptsSource />} />
                 <Route path="/edit_excerpts/:id"  element={<EditExcerpts /> } />
                 <Route path="/upload_excerpts/:id/:reference_number"  element={ <UploadExcerpts /> } />
                 <Route path="/transfer_excerpts"  element={ <TransferExcerpts /> } />
