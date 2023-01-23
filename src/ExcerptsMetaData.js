@@ -5,14 +5,15 @@ import axios from 'axios'
 import { useContext } from "react"
 import { ApiContext } from "./App"
 import { Link } from 'react-router-dom'
-import SourceFileExcerpts from './global_components/SourceFileExcerts'
+import SourceFileExcerpts from './global_components/SourceFileExcerpts'
 
 const ExcerptsMetaData = () => {
 
     const api = useContext(ApiContext)
     const { id } = useParams()
     const [ metadata, setMetadata ] = useState([{}])
-    const [ source, setSource ] = useState([{}])
+    const [ source, setSource ] = useState(0)
+    const x = 0
 
     useEffect( ()=> {
 
@@ -34,20 +35,23 @@ const ExcerptsMetaData = () => {
     useEffect(()=> {
 
         //get source file
-
         let parent_id = {
             'parent_id': id
         }
-
+    
         axios.post( api.excerpts + 'get_source_file.php', parent_id )
         .then(function (response) {
-    
-            setSource(response.data)
+            
+            let data = response.data
+            setSource(data[0]['file'])
            
         })
 
 
+
     },[])
+
+   
 
     return (
         <div>
@@ -210,8 +214,8 @@ const ExcerptsMetaData = () => {
                             >
                             <Tab eventKey="home" title="Source File">
 
-                                <SourceFileExcerpts id={source} />
-                                
+                                <SourceFileExcerpts id={source} />    
+                                                         
                             </Tab>
                             <Tab eventKey="profile" title="Movements">
                                

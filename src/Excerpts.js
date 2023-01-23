@@ -127,7 +127,7 @@ const Excerpts = () => {
         <div>
             <GlobalNavigation />
 
-            <h1>Excerpts Archive</h1>
+            <h1 className='excerpts-metadata-title' style={{'text-align' : 'center'}}>Excerpts Archive</h1>
             <br />
             <br />
             <Container>

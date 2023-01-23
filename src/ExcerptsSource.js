@@ -1,5 +1,5 @@
 import react, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ApiContext } from './App'
 import axios from 'axios'
 import Select from 'react-select'
@@ -12,6 +12,7 @@ const ExcerptsSource = () => {
     const api = useContext(ApiContext)
     const [ dts, setDTs ] = useState([{}])
     const [ source, setSource ] = useState('')
+    const navigate = useNavigate()
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -49,7 +50,7 @@ const ExcerptsSource = () => {
         axios.post( api.dts + 'submit_source.php', data )
         .then(function (response) {
             
-            console.log(response.data)
+            navigate("/excerpts_metadata/" + id)
         
         })
 
