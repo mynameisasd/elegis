@@ -1,14 +1,43 @@
-import React, { useContext } from 'react'
-import { Container , Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Container, Row, Col , Nav, Navbar, NavDropdown, Button } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { AiFillFileAdd } from "react-icons/ai";
 import { BsFillArchiveFill, BsFillForwardFill, BsCardList } from 'react-icons/bs'
 import { ApiContext } from '../App';
+import Cookies from 'universal-cookie/cjs/Cookies';
+import { useEffect } from 'react';
 
 const GlobalNavigation = () => {
-
+    const cookies = new Cookies()
+    const navigate = useNavigate()
     const api = useContext(ApiContext)
+    const [ userFullName, setUserFullName ] = useState('')
+
+    useEffect(()=> {
+
+       if(cookies.get('user_info') == null)
+       {     
+            //back to login
+            navigate('/')
+       }
+       else
+       {
+         let info = cookies.get('user_info')
+     
+         console.log(info)
+         setUserFullName(info.fname + ' ' + info.lname)
+       }
+
+    },[])
+
+
+    const logout = () => {
+
+        cookies.remove('user_info')
+        navigate('/')
+
+    }
 
     return (
         <div>
@@ -51,8 +80,16 @@ const GlobalNavigation = () => {
                         <Link className='color-white' to="/dts_bulk_transfer">Transfer <BsFillForwardFill style={{'font-size':'20px', 'float':'right', 'color':'black'}} /></Link>
                     </NavDropdown.Item>
                 </NavDropdown>
-
                 </Nav>
+                <Row>
+                    <Col>
+                        <div>
+                            <img style={{'width':'50px'}} alt="iconuser" src="https://tcrf.net/images/3/39/RO-unused-hairanimation-swordsman-m-attack1.gif" />
+                            <small><strong>Hi!  {userFullName}</strong></small>
+                        </div>
+                        <Button size="sm" variant="danger" onClick={logout} >LOGOUT</Button>
+                    </Col>
+                </Row>
                 </Container>
             </Navbar>
             <br/>

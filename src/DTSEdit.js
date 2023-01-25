@@ -19,7 +19,6 @@ const DTSEdit = () => {
 
     const onSubmit = (data) => {
 
-    
         axios.post( api.dts + 'edit_dts.php', data )
         .then(function (response) {
     
@@ -27,7 +26,6 @@ const DTSEdit = () => {
 
         })
        
-
     }
 
     useEffect(()=> {

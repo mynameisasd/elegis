@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import Cookies from 'universal-cookie';
 
 import { useNavigate  } from 'react-router-dom'
 
@@ -10,10 +11,13 @@ import { ApiContext } from './App';
 
 
 const DTSAdd = () => {
-
+    const cookies = new Cookies()
+    const [ name, setName ] = useState('')
     const navigate = useNavigate()
     const api = useContext(ApiContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+    
 
     const onSubmit = (data) => {
 
@@ -26,6 +30,13 @@ const DTSAdd = () => {
 
 
     }
+
+    useEffect(()=>{
+       
+        let name = cookies.get('user_info')
+        setName(name.fname + ' ' + name.lname)
+
+    },[])
 
     return (
         <div>
@@ -93,14 +104,9 @@ const DTSAdd = () => {
                                 </Form.Select>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="Contact Person">
-                                <Form.Label>Entered By</Form.Label>
-                                    <Form.Select aria-label="Default select example" {...register("entered_by") }>
-                                        <option value="">select option</option>
-                                        <option value="Jerick Buitizon">Jerick Buitizon</option>
-                                        <option value="Sharmaine Tojon">Sharmaine Tojon</option>
-                                        <option value="Marilou Nifras">Marilou Nifras</option>
-                                    </Form.Select>
+                            <Form.Group className="mb-3 " style={{display:'none'}} controlId="Entered By">
+                                <Form.Label>Entered BY</Form.Label>
+                                <Form.Control type="text" value={name}  placeholder="Received By  " {...register("entered_by") } required    />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="Contact Person">

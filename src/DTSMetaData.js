@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Tab, Tabs, Button, Table, ListGroup  } from 'react-bootstrap'
+import { Container, Row, Col, Tab, Tabs, Button, DropdownButton, Dropdown, ButtonGroup , ListGroup  } from 'react-bootstrap'
 import { useParams, Link } from 'react-router-dom';
 import Barcode from 'react-barcode'
 import axios from 'axios'
@@ -7,6 +7,7 @@ import { AiFillPrinter, AiOutlineUpload, AiFillEdit } from "react-icons/ai"
 import { ApiContext } from './App';
 import DisplayReferral from './global_components/DisplayReferral';
 import { AiTwotonePushpin } from "react-icons/ai";
+import DocumentStatusStyle from './global_components/DocumentStatusStyle';
 
 
 
@@ -74,10 +75,12 @@ const DTSMetaData = () => {
         axios.post( api.dts + 'get_additional_files.php', additional_files )
         .then(function (response) {
     
-            console.log(response.data)
             setAdditionalFile(response.data)
 
         })
+
+
+      
         
     },[])
     
@@ -108,46 +111,53 @@ const DTSMetaData = () => {
                     </Col>
                 </Row>
 
+                <Row>
+                    <Col>
+                        <div className='text-right'>
+                            <ButtonGroup>
+                                <DropdownButton as={ButtonGroup} title="ACTIONS" id="bg-nested-dropdown">
+                                    <Dropdown.Item eventKey="1"> <Link  to={"/dts_print/" + barcode } target={'_blank'} style={{ 'color':'black', 'text-decoration':'none'}}  ><AiFillPrinter style={{'float':'right', 'font-size':'20px'}}/>PRINT </Link> </Dropdown.Item>
+                                    <Dropdown.Item eventKey="2"><Link  to={"/dts_upload/" + metadata[0]['id'] + '/' + metadata[0]['dts']} style={{ 'color':'black', 'text-decoration':'none'}} > <AiOutlineUpload style={{'float':'right','font-size':'20px'}} />   UPLOAD FILE</Link></Dropdown.Item>
+                                    <Dropdown.Item eventKey="3"><Link  to={"/dts_edit/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{'color':'black',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> EDIT</Link></Dropdown.Item>
+                                    <Dropdown.Item disabled={ Object.keys(referral).length  > 0 ? true : '' } eventKey="4"><Link  to={"/dts_referral/" + metadata[0]['id']+ "/" + metadata[0]['dts'] + "/" + metadata[0]['barcode']} style={{ 'color':'black', 'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> REFERRAL</Link></Dropdown.Item>
+                                    <Dropdown.Item eventKey="4"><Link  to={"/dts_additional_file/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{ 'color':'black', 'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} />ADDITIONAL FILE</Link></Dropdown.Item>
+                                </DropdownButton>
+                            </ButtonGroup>
+                        </div>
+                    </Col>    
+                </Row> 
                 <br />
-
                 <Row>
-                    <Col md="1" className='text-right'>
-                        <h6>DTS:</h6>
-                    </Col>
-                    <Col md="11" className='text-left'>
-                        <h6>{metadata[0]['dts']}</h6>
-                    </Col>
-                </Row>
+                    <Col>
+                        <Row>
+                            <Col md="1" className='text-right'>
+                                <h6>DTS:</h6>
+                            </Col>
+                            <Col md="11" className='text-left'>
+                                <h6>{metadata[0]['dts']}</h6>
+                            </Col>
+                        </Row>
 
-                <Row>
-                    <Col md="1" className='text-right'>
-                        <h6>Barcode:</h6>
-                    </Col>
-                    <Col md="2" className='text-left'>
-                        <h6><Barcode value={barcode} /></h6>
-                    </Col>
-                    <Col md="7" className='text-left'>
-                        
+                        <Row>
+                            <Col md="1" className='text-right'>
+                                <h6>Barcode:</h6>
+                            </Col>
+                            <Col md="2" className='text-left'>
+                                <h6><Barcode value={barcode} /></h6>
+                            </Col>
+                            <Col md="7" className='text-left'>
+                                
+                            </Col>
+                            <Col md="2">
+                                
+                            </Col>
+                        </Row>
                     </Col>
                     <Col md="2">
-                        <div className='text-right'>
-                            <Button style={{'width':'100%', 'text-align':'left'}} variant="info" size="sm" ><Link target={'_blank'} style={{'color':'white',  'text-decoration':'none'}} to={"/dts_print/" + barcode}><AiFillPrinter style={{'float':'right', 'font-size':'20px'}}/>PRINT</Link></Button>
-                            <br />
-                            <br />
-                            <Button size="sm" variant="info" style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_upload/" + metadata[0]['id'] + '/' + metadata[0]['dts']} style={{'color':'white',  'text-decoration':'none'}} > <AiOutlineUpload style={{'float':'right','font-size':'20px'}} />   UPLOAD FILE</Link></Button>
-                            <br />
-                            <br />
-                            <Button size="sm" variant="info" style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_edit/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> EDIT</Link></Button>
-                            <br />
-                            <br />
-                            <Button size="sm" variant="info"  disabled={ Object.keys(referral).length  > 0 ? true : '' } style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_referral/" + metadata[0]['id']+ "/" + metadata[0]['dts'] + "/" + metadata[0]['barcode']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> REFERRAL</Link></Button>
-                            <br />
-                            <br />
-                            <Button size="sm" variant="info" style={{'width':'100%', 'text-align':'left'}}><Link target={'_blank'} to={"/dts_additional_file/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{'color':'white',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} />ADDITIONAL FILE</Link></Button>
-                            
-                        </div>
+                        <img  style={{'width':'100px', 'float':'right'}} alt="logo" src={api.dts + "/img/SBLOGO2019.png"} />
                     </Col>
                 </Row>
+                
                 <br/>
                 <br/>
                 <Row>
@@ -155,7 +165,10 @@ const DTSMetaData = () => {
                         <h6>Subject:</h6>
                     </Col>
                     <Col md="11" className='text-left'>
-                        <h6>{metadata[0]['subject']}</h6>
+                        <strong>
+                             <h6>{metadata[0]['subject']}</h6>
+                        </strong>
+                        
                     </Col>
                 </Row>
                 <br/>
@@ -204,7 +217,7 @@ const DTSMetaData = () => {
                                         Action Status:
                                     </Col>
                                     <Col md="10" className='text-left'>
-                                        {metadata[0].action_status}
+                                        <DocumentStatusStyle  status={metadata[0]['action_status']} />
                                     </Col>
                                 </Row>
                                 <Row>
@@ -247,10 +260,11 @@ const DTSMetaData = () => {
                                              Object.keys(referral).length > 0 ? <div><h5>Referral</h5><h6 style={{'text-align':'left'}}>Date Referred: {referral[0]['date_referred']}</h6></div>: ''
                                         }
                                         
-                                        {
+                                        {   
+                                            referral != '' ?
                                             referral.map((row, index )=>
                                                 <div>  <DisplayReferral  committee_id={row.committee_id} /> </div>
-                                            ) 
+                                            ): ''
                                         }
                                         <hr />
                                     </Col>
@@ -265,6 +279,7 @@ const DTSMetaData = () => {
                                              Object.keys(additionalFile).length > 0 ? <div><h5>Additional File/Files</h5></div>: ''
                                         }
                                        {
+                                        additionalFile != '' ?
                                         additionalFile.map((row, index)=>
                                             <ListGroup key={index}>
                                                 <ListGroup.Item>
@@ -273,7 +288,9 @@ const DTSMetaData = () => {
                                                     <p>File: <a href={'http://192.168.0.106/document_tracking/upload/' + row.file_name} target="_blank">{row.file_name}</a> </p>
                                                 </ListGroup.Item>
                                             </ListGroup>
-                                        )
+                                        ) 
+                                        : ''
+                                        
                                        }
                                     </Col>
                                     <Col md="4"></Col>
@@ -285,17 +302,21 @@ const DTSMetaData = () => {
                                     <Col>
                                         
                                        {
+                                        transferrredInfo != '' ? 
                                         transferrredInfo.map((row, index)=>
                                             <div key={index}>
                                                 <p>Transferred on: {row.date}</p>
                                                 <p>Series: <Link  target="_blank" to={"/dts_bulk_transfer_print/" + row.series + '/' + row.by + '/' + formatDate(row.date)}  >{row.series} </Link></p>
                                                
                                             </div>
-                                        )
+                                        ) : ''
+
                                        }
                                        <hr />
                                     </Col>
-                                    <Col md="4"></Col>
+                                    <Col md="4">
+                                        
+                                    </Col>
                                 </Row>
 
                                

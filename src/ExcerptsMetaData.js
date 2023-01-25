@@ -213,9 +213,9 @@ const ExcerptsMetaData = () => {
                             className="mb-3"
                             >
                             <Tab eventKey="home" title="Source File">
-
-                                <SourceFileExcerpts id={source} />    
-                                                         
+                                
+                                { source == '' ?  <small><img style={{'width': '150px'}} alt="loading image" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bc72fcb6-787f-489d-8764-fce01bf45ffb/d22hq47-51f6aeb9-27df-46c5-8a16-a64e25edaa79.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2JjNzJmY2I2LTc4N2YtNDg5ZC04NzY0LWZjZTAxYmY0NWZmYlwvZDIyaHE0Ny01MWY2YWViOS0yN2RmLTQ2YzUtOGExNi1hNjRlMjVlZGFhNzkuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.EoggLOOb5EEsIUWrpfR4yl-4NyUVZMeWc039QjunKTg" / ></small> : <SourceFileExcerpts id={source} /> }
+                                
                             </Tab>
                             <Tab eventKey="profile" title="Movements">
                                
