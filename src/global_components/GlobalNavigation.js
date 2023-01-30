@@ -24,9 +24,7 @@ const GlobalNavigation = () => {
        else
        {
          let info = cookies.get('user_info')
-     
-         console.log(info)
-         setUserFullName(info.fname + ' ' + info.lname)
+            setUserFullName(info.fname + ' ' + info.lname)
        }
 
     },[])

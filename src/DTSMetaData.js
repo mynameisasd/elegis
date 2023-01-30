@@ -8,6 +8,7 @@ import { ApiContext } from './App';
 import DisplayReferral from './global_components/DisplayReferral';
 import { AiTwotonePushpin } from "react-icons/ai";
 import DocumentStatusStyle from './global_components/DocumentStatusStyle';
+import DTSApproved from './global_components/DTSApproved';
 
 
 
@@ -106,7 +107,7 @@ const DTSMetaData = () => {
                 <Row>
                     <Col>
                         <div className='text-left'>
-                            <h1 className='meta-data-header'>METADATA</h1>
+                            <h1 className='meta-data-header'>DTS METADATA</h1>
                         </div>
                     </Col>
                 </Row>
@@ -116,7 +117,7 @@ const DTSMetaData = () => {
                         <div className='text-right'>
                             <ButtonGroup>
                                 <DropdownButton as={ButtonGroup} title="ACTIONS" id="bg-nested-dropdown">
-                                    <Dropdown.Item eventKey="1"> <Link  to={"/dts_print/" + barcode } target={'_blank'} style={{ 'color':'black', 'text-decoration':'none'}}  ><AiFillPrinter style={{'float':'right', 'font-size':'20px'}}/>PRINT </Link> </Dropdown.Item>
+                                    <Dropdown.Item eventKey="2"><Link  to={"/dts_print/" + barcode} style={{ 'color':'black', 'text-decoration':'none'}} > <AiFillPrinter style={{'float':'right','font-size':'20px'}} />PRINT</Link></Dropdown.Item>
                                     <Dropdown.Item eventKey="2"><Link  to={"/dts_upload/" + metadata[0]['id'] + '/' + metadata[0]['dts']} style={{ 'color':'black', 'text-decoration':'none'}} > <AiOutlineUpload style={{'float':'right','font-size':'20px'}} />   UPLOAD FILE</Link></Dropdown.Item>
                                     <Dropdown.Item eventKey="3"><Link  to={"/dts_edit/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{'color':'black',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> EDIT</Link></Dropdown.Item>
                                     <Dropdown.Item disabled={ Object.keys(referral).length  > 0 ? true : '' } eventKey="4"><Link  to={"/dts_referral/" + metadata[0]['id']+ "/" + metadata[0]['dts'] + "/" + metadata[0]['barcode']} style={{ 'color':'black', 'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> REFERRAL</Link></Dropdown.Item>
@@ -317,6 +318,15 @@ const DTSMetaData = () => {
                                     <Col md="4">
                                         
                                     </Col>
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col></Col>
+                                    <Col>
+                                       { id != '' ? <DTSApproved id={id} />  : '' }
+                                        
+                                    </Col>
+                                    <Col></Col>
                                 </Row>
 
                                

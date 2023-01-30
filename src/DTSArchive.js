@@ -106,7 +106,7 @@ const DTSArchive = () => {
     return (
         <div>
             <GlobalNavigation />
-            <h1>Document Tracking System</h1>
+            <h1> <img alt="image" style={{'width':'200px'}} src="https://static.vecteezy.com/system/resources/previews/008/292/833/non_2x/contract-documents-documents-with-paper-sheets-signatures-and-sticky-notes-employment-business-and-finance-hiring-cartoon-illustration-isolate-on-a-white-background-vector.jpg" /> DOCUMENT TRACKING SYSTEM</h1>
             <br />
             <br />
             <Container>

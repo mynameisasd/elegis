@@ -127,7 +127,7 @@ const Excerpts = () => {
         <div>
             <GlobalNavigation />
 
-            <h1 className='excerpts-metadata-title' style={{'text-align' : 'center'}}>Excerpts Archive</h1>
+            <h1 style={{'text-align' : 'center'}}> <img alt="image" style={{'width':'200px'}} src="https://static.vecteezy.com/system/resources/previews/008/292/833/non_2x/contract-documents-documents-with-paper-sheets-signatures-and-sticky-notes-employment-business-and-finance-hiring-cartoon-illustration-isolate-on-a-white-background-vector.jpg" />EXCERPTS ARCHIVE</h1>
             <br />
             <br />
             <Container>

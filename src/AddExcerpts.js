@@ -1,14 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import GlobalNavigation from './global_components/GlobalNavigation'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { set, useForm } from 'react-hook-form'
 import axios from 'axios'
 import { ApiContext } from './App'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 
 const AddExcerpts = () => {
 
+    const cookies = new Cookies()
+    const [ name , setName  ] = useState('')
     const navigate = useNavigate()
     const api = useContext(ApiContext);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -49,13 +52,19 @@ const AddExcerpts = () => {
 
     }
 
+    useEffect(()=>{
+       
+        let name = cookies.get('user_info')
+        setName(name.fname + ' ' + name.lname)
 
+    },[])
 
     return (
         <div>
             <GlobalNavigation />
             <Container>
-                <h1>Add Excerpts</h1>
+                <img alt="image" src="https://media.tenor.com/Trqn0AC_d98AAAAC/document-email.gif"  style={{'width':'150px'}} />
+                <h1>ADD EXCERPTS</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>  
                 <br />
                     <Row>
@@ -139,9 +148,9 @@ const AddExcerpts = () => {
                                 <Form.Control type="date" placeholder="Date Approved" {...register("date_approved")} />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="entered_by">
+                            <Form.Group className="mb-3" controlId="entered_by" style={{'display':'none'}}>
                                 <Form.Label>Entered By</Form.Label>
-                                <Form.Control type="text" placeholder="Entered By" {...register("entered_by")} />
+                                <Form.Control type="text" placeholder="Entered By" value={name} {...register("entered_by")} />
                             </Form.Group>
 
                         </Col>

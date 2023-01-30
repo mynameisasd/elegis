@@ -41,8 +41,10 @@ const DTSAdd = () => {
     return (
         <div>
             <GlobalNavigation />
+           
+            <img alt="image" src="https://media.tenor.com/Trqn0AC_d98AAAAC/document-email.gif"  style={{'width':'150px'}} />
             <h1>
-                ADD DTS
+                 ADD DTS
             </h1>
             <br />
             <Container>

@@ -58,7 +58,8 @@ const  Login = () =>{
             <br/>
             <br/>
             <div>
-                <img alt="image" src="https://gifimage.net/wp-content/uploads/2018/04/ragnarok-gif-10.gif" />
+                {/* <img alt="image" src="https://gifimage.net/wp-content/uploads/2018/04/ragnarok-gif-10.gif" /> */}
+                <img alt="image" style={{'width': '200px'}} src="https://cdn.dribbble.com/users/1746237/screenshots/11276091/media/fa47c19cbbbc00b2f5eceda0459c34db.gif" />
             </div>
             <h1 className='text-center'>E-Legis v2</h1>
             <Row>
