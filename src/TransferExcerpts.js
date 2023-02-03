@@ -26,7 +26,6 @@ const TransferExcerpts = () => {
     const handleRefNumber = (selectedOptions) => {
 
        setTransferExcerpts(selectedOptions)
-       console.log(selectedOptions)
 
     }
 

@@ -18,18 +18,19 @@ const PrintTransmittalExcerpts = () => {
         let data = {
             series: series
         }
+
         axios.post( api.excerpts + 'get_transferred_by_series.php', data)
         .then(function (response) {
 
             setInfo(response.data)
             setGeneralInfo(response.data[0])
+            console.log(response.data)
 
             let count = Object.keys(response.data).length
 
            setCount(count)
         })
         
-
     },[])
 
     return (
@@ -75,11 +76,11 @@ const PrintTransmittalExcerpts = () => {
             </tr>
 
             {
-
                 info.map((row, index)=>
                     <tr key={index} style={{'border-bottom':'1px solid black'}}>
                         <td><small style={{'font-size':'12px'}}>{row['excerpt_number']}</small></td>
-                        <td style={{'text-align':'justify','font-size':'12px'}}><small><DisplayExcerptTitle refNum={row['excerpt_number']} /></small></td>
+                    
+                        <td style={{'text-align':'justify','font-size':'12px'}}><small> { info != '' ? <DisplayExcerptTitle refNum={row['excerpt_number']} /> : '' }  </small></td>
                         <td></td>
                     </tr>
                 )

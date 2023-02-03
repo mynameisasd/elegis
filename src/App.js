@@ -40,7 +40,7 @@ export const ApiContext = React.createContext();
 
 const api = {
   excerpts: 'http://192.168.0.106/excerpts/' ,
-  dts: 'http://192.168.0.106/document_tracking/'
+  dts: 'http://192.168.0.106/document_tracking/',
 }
 
 
@@ -49,19 +49,19 @@ function App() {
     <Container fluid>
       <div className="App">
         <ApiContext.Provider value={api}>
-          <Router>
+          <Router basename='/'>
             <div>
-              <Routes basename="/"> 
+              <Routes> 
                 <Route path="/"  element={<Login />} />
                 <Route path="/dashboard"  element={ <Dashboard /> } />
                 <Route path="/excerpts"  element={<Excerpts />} />
                 <Route path="/excerpts_movement"  element={<ExcerptsMovement />} />
-                <Route path="/add_excerpts"  eement={<AddExcerpts />} />
+                <Route path="/add_excerpts"  element={<AddExcerpts />} />
                 <Route path="/excerpts_metadata/:id"  element={<ExcerptsMetaData />} />
                 <Route path="/excerpts_source/:id/:reference_number"  element={<ExcerptsSource />} />
                 <Route path="/edit_excerpts/:id"  element={<EditExcerpts /> } />
                 <Route path="/upload_excerpts/:id/:reference_number"  element={ <UploadExcerpts /> } />
-                <Route path="/transfer_excerptsl"  element={ <TransferExcerpts /> } />
+                <Route path="/transfer_excerpts"  element={ <TransferExcerpts /> } />
                 <Route path="/print_transmittal_excerpts/:series"  element={ <PrintTransmittalExcerpts /> }  />
                 <Route path="/transmittal_list"  element={ <TransmittalList /> }  />
                 <Route path="/dts_archive"  element={<DTSArchive />} />

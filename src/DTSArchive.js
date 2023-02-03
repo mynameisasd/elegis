@@ -14,7 +14,16 @@ const columns = [
         name: 'DTS and Barcode',
         cell:(row) => ( <div style={{padding:'15px'}}><Button size="sm" onClick={()=>window.open('/dts_metadata/' + row.barcode + '/' + row.id,'_blank')} >{row.barcode}</Button><br/><strong>DTS:</strong> { row.dts }</div>),
         sortable: true,
-        width:'250px'
+        width:'220px'
+    },
+    {
+        name: 'Date Recieved',
+        selector: row => row.date_and_time ,
+        sortable: true,
+        width:'100px',
+        wrap:true,
+        style:{'text-align':'justify'}
+       
     },
     {
         name: 'Subject',

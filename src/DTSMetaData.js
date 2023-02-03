@@ -286,7 +286,7 @@ const DTSMetaData = () => {
                                                 <ListGroup.Item>
                                                     <p>Date: {row.date}</p>
                                                     <p>Remarks: {row.remarks}</p>
-                                                    <p>File: <a href={'http://192.168.0.106/document_tracking/upload/' + row.file_name} target="_blank">{row.file_name}</a> </p>
+                                                    <p>File: <a href={'http://192.168.0.100/document_tracking/upload/' + row.file_name} target="_blank">{row.file_name}</a> </p>
                                                 </ListGroup.Item>
                                             </ListGroup>
                                         ) 

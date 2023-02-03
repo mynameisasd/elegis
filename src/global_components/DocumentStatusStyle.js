@@ -6,11 +6,11 @@ const DocumentStatusStyle = ( status ) => {
 
     if(status.status === "Acted")
     {
-        color = "red"
+        color = "green"
     }
     else if(status.status === "active" || status.status === 'Active')
     {  
-        color = "green"
+        color = "red"
     }
     else if(status.status === "Acted and Transfered")
     {
