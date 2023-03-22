@@ -6,6 +6,7 @@ import { useContext } from "react"
 import { ApiContext } from "./App"
 import { Link } from 'react-router-dom'
 import SourceFileExcerpts from './global_components/SourceFileExcerpts'
+import ExcerptMovement from './global_components/ExcerptMovement'
 
 const ExcerptsMetaData = () => {
 
@@ -82,7 +83,7 @@ const ExcerptsMetaData = () => {
                             </Col>
                             <Col md="10" className='text-left'>
                                 <strong>
-                                    { metadata[0]['e_referenceNumber']}
+                                    { metadata[0]['e_referenceNumber'] }
                                 </strong>
                                 
                             </Col>
@@ -218,7 +219,7 @@ const ExcerptsMetaData = () => {
                                 
                             </Tab>
                             <Tab eventKey="profile" title="Movements">
-                               
+                               { metadata[0]['e_referenceNumber'] != '' ? <ExcerptMovement refNum={metadata[0]['e_referenceNumber']} /> : '' }
                             </Tab>
                         </Tabs>
                     </Col>

@@ -9,7 +9,7 @@ const DTSApproved = ({id}) => {
 
 
     return (
-        <div><h1>DTS Approved</h1> {id}</div>
+        <div></div>
 
     )
 } 

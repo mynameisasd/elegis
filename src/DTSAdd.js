@@ -8,6 +8,7 @@ import { useNavigate  } from 'react-router-dom'
 
 import GlobalNavigation from './global_components/GlobalNavigation';
 import { ApiContext } from './App';
+import LatestDTS from './global_components/LatestDTS';
 
 
 const DTSAdd = () => {
@@ -46,8 +47,15 @@ const DTSAdd = () => {
             <h1>
                  ADD DTS
             </h1>
+            
             <br />
             <Container>
+                <Row>
+                    <Col>
+                        <LatestDTS />
+                    </Col>
+                </Row>
+                <hr/>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Row>
                         <Col md="4">
