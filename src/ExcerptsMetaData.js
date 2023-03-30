@@ -7,6 +7,7 @@ import { ApiContext } from "./App"
 import { Link } from 'react-router-dom'
 import SourceFileExcerpts from './global_components/SourceFileExcerpts'
 import ExcerptMovement from './global_components/ExcerptMovement'
+import Transmittal_Details from './global_components/Transmittal_Details'
 
 const ExcerptsMetaData = () => {
 
@@ -219,7 +220,8 @@ const ExcerptsMetaData = () => {
                                 
                             </Tab>
                             <Tab eventKey="profile" title="Movements">
-                               { metadata[0]['e_referenceNumber'] != '' ? <ExcerptMovement refNum={metadata[0]['e_referenceNumber']} /> : '' }
+
+                              
                             </Tab>
                         </Tabs>
                     </Col>

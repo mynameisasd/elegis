@@ -5,6 +5,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { ApiContext } from './App';
 import GlobalNavigation from './global_components/GlobalNavigation';
 import { Link } from 'react-router-dom';
+import Transmittal_Details from './global_components/Transmittal_Details';
 
 
 const columns = [
@@ -20,14 +21,32 @@ const columns = [
         name: 'Title',
         selector: row => row.e_title ,
         sortable: true,
-        width:'800px',
+        width:'700px',
         wrap:true,
         style:{'text-align':'justify'}
        
     },
+    
+    {
+        name: 'Date Adopted',
+        selector: row => row.e_dateAdopted,
+        sortable: true,
+        width:'100px'
+    },
+    {
+        name: 'Date Approved',
+        style:{'text-align':'justify'},
+        selector: row => <div>
+                            {row.e_dateApproved ? row.e_dateApproved :
+                             row.e_referenceNumber != '' ? <Transmittal_Details reference_number={row.e_referenceNumber}  />  : ''
+                            }
+                        </div>, 
+        sortable: true,
+        width:'150px'
+    },
     {
         name: 'File',
-        cell : (row) => ( <a href={'http://192.168.0.106/excerpts/upload/' + row.e_fileLink} target="_blank">{row.e_fileLink}</a> ),
+        cell : (row) => (<a href={'http://192.168.0.106/excerpts/upload/' + row.e_fileLink} target="_blank">{row.e_fileLink}</a> ),
         sortable: true,
         width:'100px'
     },
@@ -40,20 +59,8 @@ const columns = [
                 <br/>   
             </div>),
         sortable: true,
-        width:'150px'
-    },
-    {
-        name: 'Date Adopted',
-        selector: row => row.e_dateAdopted,
-        sortable: true,
-        width:'100px'
-    },
-    {
-        name: 'Date Approved',
-        selector: row => row.e_dateApproved,
-        sortable: true,
-        width:'100px'
-    },
+        width:'200px'
+    }
 ];
 
 
