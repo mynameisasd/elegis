@@ -4,23 +4,34 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { ApiContext } from './App';
+import Spinner from 'react-bootstrap/Spinner';
+
 
 
 import DocumentStatusStyle from './global_components/DocumentStatusStyle';
+import DTSStatusMonitoring from './DTSStatusMonitoring';
 
 
 const columns = [
     {
-        name: 'DTS and Barcode',
-        cell:(row) => ( <div style={{padding:'15px'}}><Button size="sm" onClick={()=>window.open('/dts_metadata/' + row.barcode + '/' + row.id,'_blank')} >{row.barcode}</Button><br/><strong>DTS:</strong> { row.dts }</div>),
+        name: 'From',
+        cell : (row) => ( 
+                            <div>
+                                <small>
+                                    <div style={{'padding':'10px'}}>
+                                        <Button size="sm" onClick={()=>window.open('/dts_metadata/' + row.barcode + '/' + row.id,'_blank')} >{row.barcode}</Button>
+                                    </div>
+                                </small>
+                              
+                                <small>DTS: <strong style={{'color':'red'}}>{row.dts}</strong></small>
+                                <br/>
+                                <small>Date Received: <strong>{row.date_and_time}</strong></small>
+                                <br/>
+                                <small>From: <strong>{row.from}</strong></small>
+                            </div> 
+                        ),
         sortable: true,
-        width:'220px'
-    },
-    {
-        name: 'Date Recieved',
-        selector: row => row.date_and_time ,
-        sortable: true,
-        width:'100px',
+        width:'250px',
         wrap:true,
         style:{'text-align':'justify'}
        
@@ -58,6 +69,7 @@ const DTSArchive = () => {
     const [ dts, setDTS ] = useState([{}])
     const [ searchType, setSearchType ] = useState('dts')
     const [ search, setSearch  ] = useState('')
+    const [ loader, setLoader ] = useState(true)
 
     
     useEffect(()=>{
@@ -66,6 +78,7 @@ const DTSArchive = () => {
         .then(function (response) {
     
         setDTS(response.data);
+        setLoader(false)
 
         })
 
@@ -116,14 +129,32 @@ const DTSArchive = () => {
     return (
         <div>
             <GlobalNavigation />
-            <h1> <img alt="image" style={{'width':'200px'}} src="https://static.vecteezy.com/system/resources/previews/008/292/833/non_2x/contract-documents-documents-with-paper-sheets-signatures-and-sticky-notes-employment-business-and-finance-hiring-cartoon-illustration-isolate-on-a-white-background-vector.jpg" /> DOCUMENT TRACKING SYSTEM</h1>
-            <br />
+            <Container>
+                <Row>
+                    <Col md="4">
+                         <h1 style={{'text-align': 'left'}}> 
+                            <span style={{'color':'red', 'font-weight':'bolder'}}>D</span>ocument
+                        </h1>
+                        <h1 style={{'text-align': 'left'}}> 
+                        <span style={{'color':'red', 'font-weight':'bolder'}}>T</span>racking
+                        </h1>
+                        <h1 style={{'text-align': 'left'}}> 
+                        <span style={{'color':'red', 'font-weight':'bolder'}}>S</span>ystem 
+                        </h1>
+                    </Col>
+                    <Col md="8">
+                        <DTSStatusMonitoring />
+                    </Col>            
+                </Row>
+            </Container>
+            <hr />
             <br />
             <Container>
                 <Row>
                     <Col md="4">
                         <Form.Select onChange={handleSearchType} aria-label="Default select example">
                             <option value="dts">DTS No.</option>
+                            <option value="from">From</option>
                             <option value="subject">Subject</option>
                         </Form.Select>
                     </Col>
@@ -150,15 +181,25 @@ const DTSArchive = () => {
                 <br/>
                 <Row>
                     <Col>
-                        <DataTable
-                            columns={columns}
-                            data={dts}
-                            pagination={true}
-                            responsive={true}
-                            striped={true}
-                            highlightOnHover={true}
-                            fixedHeader={true }
-                        />
+
+                        {
+                            loader ?
+                                <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                            
+                            :
+                            <DataTable
+                                columns={columns}
+                                data={dts}
+                                pagination={true}
+                                responsive={true}
+                                striped={true}
+                                highlightOnHover={true}
+                                fixedHeader={true }
+                            />
+                        }
+                       
                     </Col>
                 </Row>
             </Container>

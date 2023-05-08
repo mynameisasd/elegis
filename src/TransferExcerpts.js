@@ -147,15 +147,16 @@ const TransferExcerpts = () => {
                                 </Form.Select>
                                 <br />
                                 <Form.Group className="mb-3" controlId="date_adopted">
-                                    <Form.Label>Date Adopted</Form.Label>
+                                    <Form.Label>Date</Form.Label>
                                     <Form.Control type="date" placeholder="Date Adopted" {...register("date")}  required />
                                 </Form.Group>
                                 <br />
 
                                 <Form.Label>Transfer By</Form.Label> 
                                 <Form.Select aria-label="Default select example"  {...register("transfer_by")} >
-                                    <option value="Jerick Buitizon">Antonia A. Gonzales</option>
-                                    <option value="Marilou P. Nifras">Mark Lawrence H. Pleyto</option>
+                                    <option value="Antonia A. Gonzales">Antonia A. Gonzales</option>
+                                    <option value="Mark Lawrence H. Pleyo">Mark Lawrence H. Pleyto</option>
+                                    <option value="Sharmain C. Tojon">Sharmaine C. Tojon</option>
                                 </Form.Select>
                                 <br />
 

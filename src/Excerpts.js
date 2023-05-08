@@ -6,16 +6,29 @@ import { ApiContext } from './App';
 import GlobalNavigation from './global_components/GlobalNavigation';
 import { Link } from 'react-router-dom';
 import Transmittal_Details from './global_components/Transmittal_Details';
+import Spinner from 'react-bootstrap/Spinner';
+
 
 
 const columns = [
     {
         name: 'Reference No.',
         cell: (row) => (
-            <div><Link target={"_blank"} to={"/excerpts_metadata/" + row.e_id} >{row.e_referenceNumber}</Link></div>
+            <div>
+                <div style={{'padding':'15px'}}>
+                    <Link target={"_blank"} to={"/excerpts_metadata/" + row.e_id} >{row.e_referenceNumber}</Link>
+                </div>
+                
+                <Button style={{'width':'100%', 'margin-bottom' :'5px', 'font-size':'12px' }} variant="success" size="sm"><Link  className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }>UPLOAD</Link></Button>
+                <br/>   
+                <Button style={{'width':'100%', 'font-size':'12px' }} variant="info" size="sm" ><Link  className='link-style' to={"/edit_excerpts/" + row.e_id }>EDIT</Link></Button>
+                <br/> 
+                <br />  
+                
+            </div>
         ),
         sortable: true,
-        width:'100px'
+        width:'150px'
     },
     {
         name: 'Title',
@@ -35,7 +48,7 @@ const columns = [
     },
     {
         name: 'Date Approved',
-        style:{'text-align':'justify'},
+        style:{'text-align':'justify'}, 
         selector: row => <div>
                             {row.e_dateApproved ? row.e_dateApproved :
                              row.e_referenceNumber != '' ? <Transmittal_Details reference_number={row.e_referenceNumber}  />  : ''
@@ -50,17 +63,7 @@ const columns = [
         sortable: true,
         width:'100px'
     },
-    {
-        name: 'Actions',
-        cell: (row) => ( <div> 
-                <Button style={{'width':'100%', 'margin-bottom' :'5px' }} variant="success" size="sm"><Link  className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }>UPLOAD</Link></Button>
-                <br/>   
-                <Button style={{width:'100%'}} variant="info" size="sm" ><Link  className='link-style' to={"/edit_excerpts/" + row.e_id }>EDIT</Link></Button>
-                <br/>   
-            </div>),
-        sortable: true,
-        width:'200px'
-    }
+   
 ];
 
 
@@ -70,6 +73,7 @@ const Excerpts = () => {
     const [ excerpts, setExcerpts ] = useState([{}])
     const [ searchType, setSearchType ] = useState('e_title')
     const [ search, setSearch  ] = useState('')
+    const [ loader, setLoader ] = useState(true)
 
 
 
@@ -80,6 +84,8 @@ const Excerpts = () => {
         .then(function (response) {
     
         setExcerpts(response.data);
+
+        setLoader(false)
 
         })
 
@@ -103,6 +109,7 @@ const Excerpts = () => {
             .then(function (response) {
         
             setExcerpts(response.data);
+            
     
             })
         }
@@ -168,16 +175,30 @@ const Excerpts = () => {
                 </Row>
                 <br/>
                 <Row>
-                    <Col>
-                        <DataTable
-                            columns={columns}
-                            data={excerpts}
-                            pagination={true}
-                            responsive={true}
-                            striped={true}
-                            highlightOnHover={true}
-                            fixedHeader={true }
-                        />
+                    <Col>  
+                            {
+                                loader ? <div>
+                                            <Spinner animation="border" role="status">
+                                                <span className="visually-hidden">Loading...</span>
+                                            </Spinner>
+                                         </div>
+                                :   <DataTable
+                                        columns={columns}
+                                        data={excerpts}
+                                        pagination={true}
+                                        responsive={true}
+                                        striped={true}
+                                        highlightOnHover={true}
+                                        fixedHeader={true }
+                                    />
+                            }
+                            
+                           
+                           
+
+                            
+                        
+                        
                     </Col>
                 </Row>
             </Container>

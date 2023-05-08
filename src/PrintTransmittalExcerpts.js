@@ -3,6 +3,7 @@ import axios from 'axios'
 import { ApiContext } from './App'
 import { useParams } from 'react-router-dom'
 import DisplayExcerptTitle from './global_components/DisplayExcerptTitle'
+import ExcerptsAdopted from './global_components/ExcerptsAdopted'
 
 
 const PrintTransmittalExcerpts = () => {
@@ -24,14 +25,13 @@ const PrintTransmittalExcerpts = () => {
 
             setInfo(response.data)
             setGeneralInfo(response.data[0])
-            console.log(response.data)
 
             let count = Object.keys(response.data).length
 
            setCount(count)
         })
         
-    },[])
+    },[series])
 
     return (
         <div>
@@ -71,7 +71,8 @@ const PrintTransmittalExcerpts = () => {
         <table style={{'width':'100%'}}>
             <tr style={{"border-bottom":'1px solid black'}}>
                 <th width="20%">Ref No.</th>
-                <th width="60%">Title</th>
+                <th width="40%">Title</th>
+                <th width="20%">Date Adopted</th>
                 <th width="20%">Remarks</th>
             </tr>
 
@@ -80,7 +81,8 @@ const PrintTransmittalExcerpts = () => {
                     <tr key={index} style={{'border-bottom':'1px solid black'}}>
                         <td><small style={{'font-size':'12px'}}>{row['excerpt_number']}</small></td>
                     
-                        <td style={{'text-align':'justify','font-size':'12px'}}><small> { info != '' ? <DisplayExcerptTitle refNum={row['excerpt_number']} /> : '' }  </small></td>
+                        <td style={{'text-align':'justify','font-size':'12px'}}><small> { info !== '' ? <DisplayExcerptTitle refNum={row['excerpt_number']} /> : '' }  </small></td>
+                        <td>{ info !== '' ? <ExcerptsAdopted ref_number={row['excerpt_number']} /> : '' }</td>
                         <td></td>
                     </tr>
                 )
@@ -97,8 +99,8 @@ const PrintTransmittalExcerpts = () => {
             <small style={{'font-size':'12px'}}>Respectfully yours,</small><br/>
             <br />
             <br />
-            <small style={{'font-size':'12px'}}><strong>ANTONIA A. GONZALES</strong></small><br />
-            <small style={{'font-size':'12px'}}>Secretary to the Sanggunian</small>
+            <small style={{'font-size':'12px'}}><strong>Sharmaine C. Tojon</strong></small><br />
+            <small style={{'font-size':'12px'}}>Records Officer I</small>
             <br/>
             <br/>
             <br/>

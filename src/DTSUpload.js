@@ -4,6 +4,8 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ApiContext } from './App'
 import axios from 'axios'
+import Spinner from 'react-bootstrap/Spinner';
+
 
 const DTSUpload = () => {
 
@@ -11,6 +13,7 @@ const DTSUpload = () => {
     const { id, dts } = useParams()
     const navigate = useNavigate()
     const [ pdf, setPdf ] = useState()
+    const [ loader, setLoader ] = useState(false) 
 
 
     const hanldeUpload = (e) => {
@@ -21,7 +24,8 @@ const DTSUpload = () => {
 
     const upload = () => {
         
-        let formdata = new FormData()
+        setLoader(true)
+        let formdata = new FormData()   
 
         formdata.append('pdf', pdf)
         formdata.append('id', id)
@@ -54,8 +58,13 @@ const DTSUpload = () => {
                         <Form.Control type="file" onChange={hanldeUpload} />
                     </Form.Group>
                     <br/>
-
-                    <Button onClick={upload} variant="success" size="sm">UPLOAD</Button>
+                    {
+                        !loader ?  <Button onClick={upload} variant="success" size="sm">UPLOAD</Button>
+                        : <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    }
+                   
                     </Col>
                 </Row>
             </Container>

@@ -19,7 +19,6 @@ const DisplayExcerptTitle = ({refNum}) => {
         .then(function (response) {
     
             setTitle(response.data[0]['e_title']);
-            console.log(response.data)
             
         })
         
