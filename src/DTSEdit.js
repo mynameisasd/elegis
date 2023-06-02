@@ -39,6 +39,7 @@ const DTSEdit = () => {
             
             let data = response.data
 
+            setValue('document_type', data[0]['document_type'])
             setValue('dts', data[0]['dts'])
             setValue('barcode', data[0]['barcode'])
             setValue('from', data[0]['from'])
@@ -67,6 +68,25 @@ const DTSEdit = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Row>
                         <Col md="4">
+
+                            <Form.Group className="mb-3" controlId="Contact Person">
+                                <Form.Label>Document Type</Form.Label>
+                                <Form.Select aria-label="Default select example"  {...register("document_type") }>
+                                    <option value="Supplemental">Supplemental</option>
+                                    <option value="Barangay Annual Budget">Barangay Annual Budget</option>
+                                    <option value="Barangay Supplemental">Barangay Supplemental</option>
+                                    <option value="SK Annual Budget">SK Annual Budget</option>
+                                    <option value="SK Supplemental">SK Supplemental</option>
+                                    <option value="Authority to LCE">Authority to LCE</option>
+                                    <option value="Accreditation">Accreditation</option>
+                                    <option value="Endorsement">Endorsement</option>
+                                    <option value="Thematic Plan">Thematic Plan</option>
+                                    <option value="Special Education Fund">Special Education Fund</option>
+                                    <option value="Barangay Resolution/Ordinance">Barangay Resolution/Ordinance</option>
+                                    <option value="Others">Others</option>
+                                </Form.Select>
+                            </Form.Group>
+
                             <Form.Group className="mb-3" controlId="DTS ">
                                 <Form.Label>DTS No.</Form.Label>
                                 <Form.Control type="number" placeholder="DTS No." {...register("dts")} required    />
@@ -82,13 +102,15 @@ const DTSEdit = () => {
                                 <Form.Control type="text"  placeholder="From" {...register("from")} required    />
                             </Form.Group>
 
+                            
+
+                        </Col>
+                        <Col md="4">
+
                             <Form.Group className="mb-3" controlId="title">
                                 <Form.Label>Subject</Form.Label>
                                 <Form.Control as="textarea"  rows={3}  {...register("subject")} required/>
                             </Form.Group>
-
-                        </Col>
-                        <Col md="4">
 
                             <Form.Group className="mb-3" controlId="-le">
                                 <Form.Label>Attachments</Form.Label>
