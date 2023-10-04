@@ -1,8 +1,99 @@
 body{
   font-family: 'Roboto', sans-serif !important;
+  /* background: #2dc12db2  !important; */
+
+}
+a
+{
+  text-decoration: none !important;
+}
+.container-fluid
+{
+  padding: 0 !important;
 }
 .App {
   text-align: center;
+
+}
+.excerpts-ref-number
+{
+  text-align: left;
+  padding: 15px 0 15px 0;
+  font-weight: bolder;
+}
+.excerpts-action
+{
+  font-weight: bolder;
+  font-size: 9px;
+  display: block;
+}
+.login-text-box
+{
+  background: #f1eef7 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  padding: 15px !important;
+}
+.icon-excerpts
+{
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  color: white;
+  background: #2a6be8;
+  border-radius: 50%;
+}
+.custom-textbox
+{
+  background: #f1eef7 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  padding: 15px !important;
+}
+
+.lock-icon
+{
+  font-size: 51px;
+  border: 2px solid #6cd36c;
+  border-radius: 50%;
+  padding: 5px;
+  color: #6cd36c;
+}
+
+.login-button
+{
+  padding: 15px !important;
+  width: 100% !important;
+  color: white !important;
+  background: #2dc12db2 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  font-size: 16px !important;
+}
+
+.custom-button
+{
+  padding: 15px !important;
+  width: 100% !important;
+  color: white !important;
+  background: #2dc12db2 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  font-size: 16px !important;
+}
+
+.excerpts_search 
+{
+  padding: 15px;
+  background: white;
+  margin: 0;
+}
+
+.custom-shadow
+{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+
 }
 
 .App-logo {

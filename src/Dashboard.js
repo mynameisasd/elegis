@@ -33,36 +33,34 @@ const Dashboard = () => {
 
     return (
 
-
         <div>
-            <GlobalNavigation />
-
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <Container>
                 <Row>
+                    <Col md="4"></Col>
                     <Col md="4">
                         <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src="https://img.freepik.com/premium-vector/wooden-gavel-judge-auctioneer-concept-auction-justice-isolated-vector-illustration_108855-3350.jpg?w=2000" />
+                            {/* <Card.Img variant="top" src="https://img.freepik.com/premium-vector/wooden-gavel-judge-auctioneer-concept-auction-justice-isolated-vector-illustration_108855-3350.jpg?w=2000" /> */}
                             <Card.Body>
-                                <Card.Title><strong>RESOLUTION</strong></Card.Title>
-
-                                    <Form.Group className="mb-3">
-                                    <Form.Label>Year</Form.Label>
-                                    <Form.Select onChange={handleYearChange} >
-                                        
-                                        {
-                                            year.map((row, index)=>
-                                                <option key={index}>{row.e_year}</option>
-                                            )
-                                        }
-
-                                    </Form.Select>
-
+                               
+                                <span style={{"color":"skyblue","font-size":"bolder"}}>E-Legis</span>
+                                <br />
+                                <Card.Title><strong>CHOOSE SYSTEM</strong></Card.Title>
+                                <hr />
+                                <Form.Group className="mb-3">
+                                    <Button size="sm" variant="success">EXCERPTS</Button>
+                                    <br /> 
+                                    <br />
+                                    <Button size="sm" variant="success">DOCUMENT TRACKING</Button>
                                 </Form.Group>
-                                <h2>90</h2>
-                                <Button variant="primary">Go somewhere</Button>
                             </Card.Body>
                         </Card>
                     </Col>
+                    <Col md="4"></Col>
                 </Row>
             </Container>
 

@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
-import { Container, Row, Col, Dropdown, Tab, Tabs } from 'react-bootstrap'
+import { Container, Row, Col, Dropdown, Tab, Tabs, Table } from 'react-bootstrap'
 import axios from 'axios'
 import { useContext } from "react"
 import { ApiContext } from "./App"
@@ -15,6 +15,7 @@ const ExcerptsMetaData = () => {
     const { id } = useParams()
     const [ metadata, setMetadata ] = useState([{}])
     const [ source, setSource ] = useState(0)
+    const [ forwardedExcerpts, setForwardedExcerpts ] = useState([{}]) 
     const x = 0
 
     useEffect( ()=> {
@@ -49,6 +50,13 @@ const ExcerptsMetaData = () => {
            
         })
 
+        axios.post( api.excerpts + 'get_forwarded_excerpts.php', parent_id )
+        .then(function (response) {
+            
+            setForwardedExcerpts(response.data)
+            console.log(response.date)
+           
+        })
 
 
     },[])
@@ -57,9 +65,9 @@ const ExcerptsMetaData = () => {
 
     return (
         <div>
-            <Container>
+            <Container style={{margin: '0 auto', padding: '0', background: 'white'}}>
                 <h1 className="excerpts-metadata-title">EXCERPTS METADATA</h1>
-                <Row>
+                <Row style={{margin:'0', padding: '0'}}>
                     <Col>
                         <div style={{'float':'right'}}>
                             <Dropdown>
@@ -69,14 +77,14 @@ const ExcerptsMetaData = () => {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item ><Link to={'/excerpts_source/' + id + '/' + metadata[0]['e_referenceNumber']}>Source File</Link></Dropdown.Item>
-                                    <Dropdown.Item >Add Movement</Dropdown.Item>
+                                    <Dropdown.Item ><Link to={'/excerpts_forward/' + id }>Add Movement</Link></Dropdown.Item>
                                     </Dropdown.Menu>
                             </Dropdown>
                         </div>
                     </Col>
                 </Row>
                 <br />
-                <Row>
+                <Row style={{margin:'0', padding: '0'}}>
                     <Col md="11">
                         <Row>
                             <Col md="2" className='text-left'>
@@ -110,7 +118,9 @@ const ExcerptsMetaData = () => {
 
                 <Row style={{
                         'background': '#eee',
-                        'padding': '15px',
+                        'padding': '15px 0 15px 0',
+                        'margin': '0'
+
                 }}>
                     <Col md="4">
                         
@@ -207,7 +217,7 @@ const ExcerptsMetaData = () => {
                     </Col>
                 </Row>
                 <br />
-                <Row>
+                <Row style={{margin:'0', padding: '0'}}>
                     <Col>
                         <Tabs
                             defaultActiveKey="home"
@@ -221,13 +231,46 @@ const ExcerptsMetaData = () => {
                             </Tab>
                             <Tab eventKey="profile" title="Movements">
 
+
+                                <Table striped bordered hover size="sm">
+                                    <thead>
+                                        <tr>
+                                        <th>Date</th>
+                                        <th>Forwarded to</th>
+                                        <th>No. of Copy/Copies</th>
+                                        <th>Remarks</th>
+                                        <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+
+                                            forwardedExcerpts != '' ? 
+
+                                            forwardedExcerpts.map((info, index) => (
+                                                <tr key={index}>
+                                                    <td>{info.date}</td>
+                                                    <td>{info.forwarded_to}</td>
+                                                    <td>{info.number_of_copy}</td>
+                                                    <td>{info.reason}</td>
+                                                    <td></td>
+                                                </tr> 
+                                              ))
+                                        
+                                            : ''
+                                        }
+                                        
+                                        
+                                    </tbody>
+                                    </Table>
+                                    
                               
                             </Tab>
                         </Tabs>
                     </Col>
                 </Row>
                 
-
+            <br/>
             </Container>
             
         </div>

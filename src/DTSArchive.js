@@ -5,6 +5,8 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { ApiContext } from './App';
 import Spinner from 'react-bootstrap/Spinner';
+import { AiFillFilePdf } from "react-icons/ai";
+
 
 
 
@@ -14,12 +16,12 @@ import DTSStatusMonitoring from './DTSStatusMonitoring';
 
 const columns = [
     {
-        name: 'From',
+        name: 'FROM',
         cell : (row) => ( 
                             <div>
                                 <small>
                                     <div style={{'padding':'10px'}}>
-                                        <Button size="sm" onClick={()=>window.open('/dts_metadata/' + row.barcode + '/' + row.id,'_blank')} >{row.barcode}</Button>
+                                        <Button size="sm" onClick={()=>window.open('/elegis/dts_metadata/' + row.barcode + '/' + row.id,'_blank')} >{row.barcode}</Button>
                                     </div>
                                 </small>
                               
@@ -37,7 +39,7 @@ const columns = [
        
     },
     {
-        name: 'Subject',
+        name: 'SUBJECT',
         selector: row => row.subject ,
         sortable: true,
         width:'800px',
@@ -46,13 +48,13 @@ const columns = [
        
     },
     {
-        name: 'File',
+        name: 'FILE',
         cell : (row) => ( <a href={'http://192.168.0.106/document_tracking/upload/' + row.file} target="_blank">{row.file}</a> ),
         sortable: true,
         width:'100px'
     },
     {
-        name: 'Action Status',
+        name: 'STATUS',
         selector: (row) => <DocumentStatusStyle status={row.action_status} />,
         sortable: true,
         width:'100px'
@@ -129,7 +131,7 @@ const DTSArchive = () => {
     return (
         <div>
             <GlobalNavigation />
-            <Container>
+            {/* <Container>
                 <Row>
                     <Col md="4">
                          <h1 style={{'text-align': 'left'}}> 
@@ -146,38 +148,41 @@ const DTSArchive = () => {
                         <DTSStatusMonitoring />
                     </Col>            
                 </Row>
-            </Container>
-            <hr />
+            </Container> */}
+          
             <br />
             <Container>
-                <Row>
-                    <Col md="4">
-                        <Form.Select onChange={handleSearchType} aria-label="Default select example">
-                            <option value="dts">DTS No.</option>
-                            <option value="from">From</option>
-                            <option value="subject">Subject</option>
-                        </Form.Select>
-                    </Col>
-                    <Col md="6">
-                        <div>
-                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
-                            Search
-                            </Form.Label>
-                            <Col sm="10">
-                            <Form.Control 
-                                type="text" 
-                                placeholder="Search" 
-                                onChange={handleSearch}
-                            />
-                            </Col>
-                        </Form.Group>
-                        </div> 
-                    </Col>
-                    <Col md="2">
-                        <Button variant="success " onClick={clickSearch}>Search</Button>
-                    </Col>
-                </Row>
+                <div className='excerpts_search custom-shadow'>
+                <h4 className='text-left'> <AiFillFilePdf style={{color: 'red'}} /> DOCUMENT TRACKING SYSTEM</h4>
+                <hr />
+                    <Row>
+                        <Col md="4">
+                            <Form.Select className='custom-textbox' onChange={handleSearchType} aria-label="Default select example">
+                                <option value="dts">DTS NO.</option>
+                                <option value="from">FROM</option>
+                                <option value="subject">SUBJECT</option>
+                            </Form.Select>
+                        </Col>
+                        <Col md="6">
+                            <div>
+                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Col sm="10">
+                                <Form.Control 
+                                    className='custom-textbox'
+                                    type="text" 
+                                    placeholder="Search" 
+                                    onChange={handleSearch}
+                                />
+                                </Col>
+                            </Form.Group>
+                            </div> 
+                        </Col>
+                        <Col md="2">
+                            <Button className='custom-button' variant="success " onClick={clickSearch}>Search</Button>
+                        </Col>
+                    </Row>
+                </div>
+                
                 <br/>
                 <Row>
                     <Col>
@@ -190,6 +195,7 @@ const DTSArchive = () => {
                             
                             :
                             <DataTable
+                                className='custom-shadow'
                                 columns={columns}
                                 data={dts}
                                 pagination={true}

@@ -34,11 +34,13 @@ import Dashboard from './Dashboard';
 import ExcerptsMetaData from './ExcerptsMetaData';
 import ExcerptsSource from './ExcerptsSource';
 import ExcerptsMovement from './ExcerptsMovement';
+import ExcerptsForward from './ExcerptsForward';
 
 
 export const ApiContext = React.createContext();
 
 const api = {
+  ip_add: 'http://192.160.0.106/',
   excerpts: 'http://192.168.0.106/excerpts/' ,
   dts: 'http://192.168.0.106/document_tracking/',
 }
@@ -48,10 +50,9 @@ function App() {
   return (
     <Container fluid>
       <div className="App">
-        <ApiContext.Provider value={api}>
-          <Router basename='/'>
-            <div>
-              <Routes> 
+        <ApiContext.Provider value={api} >
+          <Router  basename='/elegis'  >
+              <Routes > 
                 <Route path="/"  element={<Login />} />
                 <Route path="/dashboard"  element={ <Dashboard /> } />
                 <Route path="/excerpts"  element={<Excerpts />} />
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/add_excerpts"  element={<AddExcerpts />} />
                 <Route path="/excerpts_metadata/:id"  element={<ExcerptsMetaData />} />
                 <Route path="/excerpts_source/:id/:reference_number"  element={<ExcerptsSource />} />
+                <Route path="/excerpts_forward/:id"  element={<ExcerptsForward />} />
                 <Route path="/edit_excerpts/:id"  element={<EditExcerpts /> } />
                 <Route path="/upload_excerpts/:id/:reference_number"  element={ <UploadExcerpts /> } />
                 <Route path="/transfer_excerpts"  element={ <TransferExcerpts /> } />
@@ -77,7 +79,7 @@ function App() {
                 <Route path="/dts_additional_file/:barcode/:id"  element={ <DTSAdditionalFile /> } />
                 <Route path="/dts_transmittal_list"  element={ <DTSTransmittalList /> } />
               </Routes>
-            </div>
+          
           </Router>
         </ApiContext.Provider>
       </div>

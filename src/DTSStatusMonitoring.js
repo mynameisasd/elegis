@@ -83,7 +83,7 @@ const DTSStatusMonitoring = () =>{
                 
             </Row>
             <hr />
-            <Row>
+            {/* <Row>
                 <Col>
                     <small style={{'text-align': 'left'}}> <AiFillRead style={{'color':'green', 'font-size':'17px'}} />Supplemental</small>
                     <h5 style={{'font-weight' : 'bolder'}}>
@@ -114,7 +114,7 @@ const DTSStatusMonitoring = () =>{
                             }
                     </h5>
                 </Col>
-            </Row>
+            </Row> */}
         </div>
     )
 }

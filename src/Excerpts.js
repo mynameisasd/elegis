@@ -7,31 +7,37 @@ import GlobalNavigation from './global_components/GlobalNavigation';
 import { Link } from 'react-router-dom';
 import Transmittal_Details from './global_components/Transmittal_Details';
 import Spinner from 'react-bootstrap/Spinner';
+import Footer from './global_components/Footer';
+import { AiFillFilePdf } from "react-icons/ai";
+import { FiEdit3, FiUpload } from "react-icons/fi";
+
 
 
 
 const columns = [
     {
-        name: 'Reference No.',
+        name: 'REFERENCE NO.',
         cell: (row) => (
             <div>
-                <div style={{'padding':'15px'}}>
-                    <Link target={"_blank"} to={"/excerpts_metadata/" + row.e_id} >{row.e_referenceNumber}</Link>
+                <div  className='excerpts-ref-number'>
+                    <Link target="_blank" to={"/excerpts_metadata/" + row.e_id} >{row.e_referenceNumber}</Link>
                 </div>
-                
-                <Button style={{'width':'100%', 'margin-bottom' :'5px', 'font-size':'12px' }} variant="success" size="sm"><Link  className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }>UPLOAD</Link></Button>
+
+                <div style={{'text-align':'left'}}>
+                    <span className='excerpts-action'>ACTIONS:</span>
+                </div>
+                <Button style={{'width':'100%', 'margin-bottom' :'5px', 'font-size':'12px', 'text-align':'left' , 'border-radius':'0' }} variant="success" size="sm"><Link  className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }> < FiUpload/> UPLOAD</Link></Button>
                 <br/>   
-                <Button style={{'width':'100%', 'font-size':'12px' }} variant="info" size="sm" ><Link  className='link-style' to={"/edit_excerpts/" + row.e_id }>EDIT</Link></Button>
+                <Button style={{'width':'100%', 'font-size':'12px', 'text-align':'left', 'border-radius':'0' }} variant="info" size="sm" ><Link  className='link-style' to={"/edit_excerpts/" + row.e_id }><FiEdit3 /> EDIT</Link></Button>
                 <br/> 
                 <br />  
-                
             </div>
         ),
         sortable: true,
         width:'150px'
     },
     {
-        name: 'Title',
+        name: 'TITLE',
         selector: row => row.e_title ,
         sortable: true,
         width:'700px',
@@ -41,13 +47,13 @@ const columns = [
     },
     
     {
-        name: 'Date Adopted',
+        name: 'ADOPTED',
         selector: row => row.e_dateAdopted,
         sortable: true,
-        width:'100px'
+        width:'150px'
     },
     {
-        name: 'Date Approved',
+        name: 'APPROVED',
         style:{'text-align':'justify'}, 
         selector: row => <div>
                             {row.e_dateApproved ? row.e_dateApproved :
@@ -58,7 +64,7 @@ const columns = [
         width:'150px'
     },
     {
-        name: 'File',
+        name: 'FILE',
         cell : (row) => (<a href={'http://192.168.0.106/excerpts/upload/' + row.e_fileLink} target="_blank">{row.e_fileLink}</a> ),
         sortable: true,
         width:'100px'
@@ -141,40 +147,40 @@ const Excerpts = () => {
         <div>
             <GlobalNavigation />
 
-            <h1 style={{'text-align' : 'center'}}> <img alt="image" style={{'width':'200px'}} src="https://static.vecteezy.com/system/resources/previews/008/292/833/non_2x/contract-documents-documents-with-paper-sheets-signatures-and-sticky-notes-employment-business-and-finance-hiring-cartoon-illustration-isolate-on-a-white-background-vector.jpg" />EXCERPTS ARCHIVE</h1>
             <br />
-            <br />
-            <Container>
-                <Row>
-                    <Col md="4">
-                        <Form.Select onChange={handleSearchType} aria-label="Default select example">
-                            <option value="e_title">Title</option>
-                            <option value="e_referenceNumber">Reference Number</option>
-                            <option value="e_excerpts">Excerpt Type</option>
-                        </Form.Select>
-                    </Col>
-                    <Col md="6">
-                        <div>
-                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
-                            Search
-                            </Form.Label>
-                            <Col sm="10">
-                            <Form.Control 
-                                type="text" 
-                                placeholder="Search" 
-                                onChange={handleSearch}
-                            />
-                            </Col>
-                        </Form.Group>
-                        </div> 
-                    </Col>
-                    <Col md="2">
-                        <Button variant="success " onClick={clickSearch}>Search</Button>
-                    </Col>
-                </Row>
+            <Container >
+                <div className='excerpts_search custom-shadow'>
+                    <h4 className='text-left'> <AiFillFilePdf style={{color:'red'}} /> RESOLUTIONS/ORDINANCES ARCHIVE</h4>
+                    <hr />
+                    <Row>
+                        <Col md="4">
+                            <Form.Select className='custom-textbox' onChange={handleSearchType} aria-label="Default select example">
+                                <option value="e_title">TITLE</option>
+                                <option value="e_referenceNumber">REFERENCE NO.</option>
+                            </Form.Select>
+                        </Col>
+                        <Col md="6">
+                            <div>
+                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">    
+                                <Col sm="10">
+                                <Form.Control 
+                                    className='custom-textbox'
+                                    type="text" 
+                                    placeholder="Search" 
+                                    onChange={handleSearch}
+                                />
+                                </Col>
+                            </Form.Group>
+                            </div> 
+                        </Col>
+                        <Col md="2">
+                            <Button className='custom-button' variant="success " onClick={clickSearch}>Search</Button>
+                        </Col>
+                    </Row>
+                </div>
+                
                 <br/>
-                <Row>
+                <Row >
                     <Col>  
                             {
                                 loader ? <div>
@@ -183,6 +189,7 @@ const Excerpts = () => {
                                             </Spinner>
                                          </div>
                                 :   <DataTable
+                                        className='custom-shadow'
                                         columns={columns}
                                         data={excerpts}
                                         pagination={true}
@@ -193,16 +200,18 @@ const Excerpts = () => {
                                     />
                             }
                             
-                           
-                           
-
-                            
-                        
-                        
                     </Col>
                 </Row>
             </Container>
-         
+            <br />
+
+            {
+                loader ? <div>
+                            
+                            </div>
+                :   
+                            <Footer />
+            }
             
         </div>
     )

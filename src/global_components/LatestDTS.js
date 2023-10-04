@@ -21,7 +21,7 @@ const LatestDTS = () => {
 
 
     return (
-        <h6 style={{'color':'red', 'text-align':'left'}}>Latest DTS No. Available: <strong>{parseInt(latest[0]['dts']) + 1}</strong></h6>
+        <h6 style={{'color':'red', 'text-align':'left', 'font-size':'14px'}}>LATEST DTS NO. AVAILABLE: <strong>{parseInt(latest[0]['dts']) + 1}</strong></h6>
     )
 }
 

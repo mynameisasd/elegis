@@ -83,6 +83,7 @@ const DTSEdit = () => {
                                     <option value="Thematic Plan">Thematic Plan</option>
                                     <option value="Special Education Fund">Special Education Fund</option>
                                     <option value="Barangay Resolution/Ordinance">Barangay Resolution/Ordinance</option>
+                                    <option value="Reclassification">Reclassification</option>
                                     <option value="Others">Others</option>
                                 </Form.Select>
                             </Form.Group>

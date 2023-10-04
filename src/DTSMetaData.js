@@ -103,7 +103,7 @@ const DTSMetaData = () => {
     return (
         <div>
             
-            <Container>
+            <Container style={{background:'white', padding: '0',}}>
                 <Row>
                     <Col>
                         <div className='text-left'>
@@ -112,11 +112,11 @@ const DTSMetaData = () => {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row style={{margin:'0'}}>
                     <Col>
                         <div className='text-right'>
-                            <ButtonGroup>
-                                <DropdownButton as={ButtonGroup} title="ACTIONS" id="bg-nested-dropdown">
+                            <ButtonGroup tyle={{'border-radius' : '0px'}} >
+                                <DropdownButton  s as={ButtonGroup} title="ACTIONS" id="bg-nested-dropdown">
                                     <Dropdown.Item eventKey="2"><Link  to={"/dts_print/" + barcode} style={{ 'color':'black', 'text-decoration':'none'}} > <AiFillPrinter style={{'float':'right','font-size':'20px'}} />PRINT</Link></Dropdown.Item>
                                     <Dropdown.Item eventKey="2"><Link  to={"/dts_upload/" + metadata[0]['id'] + '/' + metadata[0]['dts']} style={{ 'color':'black', 'text-decoration':'none'}} > <AiOutlineUpload style={{'float':'right','font-size':'20px'}} />   UPLOAD FILE</Link></Dropdown.Item>
                                     <Dropdown.Item eventKey="3"><Link  to={"/dts_edit/" + metadata[0]['barcode'] + '/' + metadata[0]['id']} style={{'color':'black',  'text-decoration':'none'}} > <AiFillEdit style={{'float':'right', 'font-size':'20px'}} /> EDIT</Link></Dropdown.Item>
@@ -128,7 +128,7 @@ const DTSMetaData = () => {
                     </Col>    
                 </Row> 
                 <br />
-                <Row>
+                <Row style={{margin:'0'}}>
                     <Col>
                         <Row>
                             <Col md="1" className='text-right'>
@@ -173,7 +173,7 @@ const DTSMetaData = () => {
                     </Col>
                 </Row>
                 <br/>
-                <Row>
+                <Row style={{margin:'0'}}>
                     <Col>
                         <Tabs
                             defaultActiveKey="info"
@@ -249,7 +249,7 @@ const DTSMetaData = () => {
                                 
                             </Tab>
                             <Tab eventKey="file" title="File">
-                               <a href={api.dts + 'upload/' + metadata[0]['file']} target="_blank">{metadata[0]['file']}</a>
+                               <a href={api.dts + 'upload/' + metadata[0]['file']} target="_"blank>{metadata[0]['file']}</a>
                             </Tab>
                             <Tab eventKey="action_taken" title="Action Taken" >
                                 <Row>
@@ -267,7 +267,6 @@ const DTSMetaData = () => {
                                                 <div>  <DisplayReferral  committee_id={row.committee_id} /> </div>
                                             ): ''
                                         }
-                                        <hr />
                                     </Col>
                                     <Col md="4"></Col>
                                 </Row>
@@ -286,7 +285,7 @@ const DTSMetaData = () => {
                                                 <ListGroup.Item>
                                                     <p>Date: {row.date}</p>
                                                     <p>Remarks: {row.remarks}</p>
-                                                    <p>File: <a href={'http://192.168.0.106/document_tracking/upload/' + row.file_name} target="_blank">{row.file_name}</a> </p>
+                                                    <p>File: <a href={api.dts + 'upload/' + row.file_name} target="_blank">{row.file_name}</a> </p>
                                                 </ListGroup.Item>
                                             </ListGroup>
                                         ) 
@@ -313,7 +312,6 @@ const DTSMetaData = () => {
                                         ) : ''
 
                                        }
-                                       <hr />
                                     </Col>
                                     <Col md="4">
                                         
@@ -328,14 +326,14 @@ const DTSMetaData = () => {
                                     </Col>
                                     <Col></Col>
                                 </Row>
-
-                               
-
                             </Tab>
                         </Tabs>
                     </Col>
                 </Row>
+                <br/>
+                <br/>
             </Container>
+           
         </div>
     )
 }
