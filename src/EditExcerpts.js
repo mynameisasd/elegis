@@ -64,102 +64,111 @@ const EditExcerpts = () => {
         <div>
             <GlobalNavigation />
             <Container>
-                <h1>Edit Excerpts</h1>
-                <form onSubmit={handleSubmit(onSubmit)}>  
-                <br />
+                <div className='custom-shadow' style={{padding:'15px', textAlign:'left'}}>
                     <Row>
-                        <Col md="4">
-                        <Form.Group className="mb-3" controlId="year">
-                            <Form.Label>Year</Form.Label>
-                            <Form.Control type="number" placeholder="Year" {...register("year")} required    />
-                        </Form.Group>
-
-                        <Form.Label>Excerpt</Form.Label>
-                        <Form.Select aria-label="Default select example" {...register("excerpt") }>
-                            <option value="Resolution">Resolution</option>
-                            <option value="Ordinance">Ordinance</option>
-                        </Form.Select>
-                        <br/>
-                        <Form.Label>Excerpt Type</Form.Label >
-                        <Form.Select aria-label="Default select example" {...register("excerpt_type")}>
-                            <option value="Accreditation - NGO/PO">Accreditation - NGO/PO</option>
-                            <option value="Adoption of Plan/PPAs">Adoption of Plan/PPAs</option>
-                            <option value="Authority to the Local Chief Executive">Authority to the Local Chief Executive</option>
-                            <option value="Endorsement for tenurial Instrument (FLAGT, CBFMA, SLUP, Etc)">Endorsement for tenurial Instrument (FLAGT, CBFMA, SLUP, Etc)</option>
-                            <option value="Endorsement of Reclassification">Endorsement of Reclassification</option>
-                            <option value="Endorsement of Project / Activity (Infrastructure, Research, Etc)">Endorsement of Project / Activity (Infrastructure, Research, Etc)</option>
-                            <option value="Finance, Budget Appropriations">Finnce, Budget Appropriations</option>
-                            <option value="In-House Resolution">In-House Resolution</option>
-                            <option value="Local Policy Imposition">Local Policy Imposition</option>
-                            <option value="Request for assistance to other Agencies">Request for assistance to other Agencies</option>
-                            <option value="Resolution of Commendation">Resolution of Commendation</option>
-                            <option value="Others" >Others</option>
-                        </Form.Select>
-                        <br/>
-                        <Form.Group className="mb-3" controlId="reference_number" >
-                            <Form.Label>Reference Number</Form.Label>
-                            <Form.Control type="text" placeholder="Reference Number" {...register("reference_number")} required />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="title">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control as="textarea" rows={3}  {...register("title")} required/>
-                        </Form.Group>
-
-                        </Col>
-                        <Col md="4">
-
-                            <Form.Group className="mb-3" controlId="sponsored_by">
-                                <Form.Label>Sponsored By:</Form.Label>
-                                <Form.Control type="text" placeholder="Sponsored By"  {...register("sponsored_by")} required />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="authored_by">
-                                <Form.Label>Authored By:</Form.Label>
-                                <Form.Control type="text" placeholder="Authored By" {...register("authored_by")} required />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="certified">
-                                <Form.Label>Certified By:</Form.Label>
-                                <Form.Control type="text" placeholder="Certified  By" {...register("certified_by")}  required />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="attested">
-                                <Form.Label>Attested By:</Form.Label>
-                                <Form.Control type="text" placeholder="Attested By" {...register("attested_by")} required />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="Approved By">
-                                <Form.Label>Approved By:</Form.Label>
-                                <Form.Control type="text" placeholder="Approved By" {...register("approved_by")} required />
-                            </Form.Group>
-
-                        </Col>
                         <Col>
-
-                            <Form.Group className="mb-3" controlId="date_adopted">
-                                <Form.Label>Date Adopted</Form.Label>
-                                <Form.Control type="text" placeholder="Date Adopted"  {...register("date_adopted")} required />
-                            </Form.Group>
-                            
-                            <Form.Group className="mb-3" controlId="date_approved">
-                                <Form.Label>Date Approved</Form.Label>
-                                <Form.Control type="text" placeholder="Date Approved" {...register("date_approved")} />
-                            </Form.Group>
-
-                            <Form.Group style={{'display':'none'}} className="mb-3" controlId="id">
-                                <Form.Label>Id</Form.Label>
-                                <Form.Control type="text" placeholder="Date Approved" {...register("id")} />
-                            </Form.Group>
-
+                            <h4 className='text-left'> RESOLUTIONS/ORDINANCES / <span style={{color:'red'}}>ADD EXCERPTS</span></h4>
                         </Col>
                     </Row>
+                    
+                    <hr/>
                     <br />
-                    <br />
-                    <Row>
-                        <Button  type="submit" variant="success">Submit</Button>
-                    </Row>
-                </form>
+                    <form onSubmit={handleSubmit(onSubmit)}>  
+                        <Row>
+                            <Col md="4">
+                            <Form.Group className="mb-3" controlId="year">
+                                <Form.Label>YEAR</Form.Label>
+                                <Form.Control className='custom-textbox' type="number" placeholder="Year" {...register("year")} required    />
+                            </Form.Group>
+
+                            <Form.Label>EXCERPTS</Form.Label>
+                            <Form.Select  className='custom-textbox' aria-label="Default select example" {...register("excerpt") }>
+                                <option value="Resolution">Resolution</option>
+                                <option value="Ordinance">Ordinance</option>
+                            </Form.Select>
+                            <br/>
+                            <Form.Label>EXCERPT TYPE</Form.Label >
+                            <Form.Select className='custom-textbox' aria-label="Default select example" {...register("excerpt_type")}>
+                                <option value="Accreditation - NGO/PO">Accreditation - NGO/PO</option>
+                                <option value="Adoption of Plan/PPAs">Adoption of Plan/PPAs</option>
+                                <option value="Authority to the Local Chief Executive">Authority to the Local Chief Executive</option>
+                                <option value="Endorsement for tenurial Instrument (FLAGT, CBFMA, SLUP, Etc)">Endorsement for tenurial Instrument (FLAGT, CBFMA, SLUP, Etc)</option>
+                                <option value="Endorsement of Reclassification">Endorsement of Reclassification</option>
+                                <option value="Endorsement of Project / Activity (Infrastructure, Research, Etc)">Endorsement of Project / Activity (Infrastructure, Research, Etc)</option>
+                                <option value="Finance, Budget Appropriations">Finnce, Budget Appropriations</option>
+                                <option value="In-House Resolution">In-House Resolution</option>
+                                <option value="Local Policy Imposition">Local Policy Imposition</option>
+                                <option value="Request for assistance to other Agencies">Request for assistance to other Agencies</option>
+                                <option value="Resolution of Commendation">Resolution of Commendation</option>
+                                <option value="Others" >Others</option>
+                            </Form.Select>
+                            <br/>
+                            <Form.Group className="mb-3" controlId="reference_number" >
+                                <Form.Label>REFERENCE NO.</Form.Label>
+                                <Form.Control className='custom-textbox' type="text" placeholder="Reference Number" {...register("reference_number")} required />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="title">
+                                <Form.Label>TITLE</Form.Label>
+                                <Form.Control className='custom-textbox' as="textarea" rows={3}  {...register("title")} required/>
+                            </Form.Group>
+
+                            </Col>
+                            <Col md="4">
+
+                                <Form.Group className="mb-3" controlId="sponsored_by">
+                                    <Form.Label>SPONSORED BY</Form.Label>
+                                    <Form.Control className='custom-textbox' type="text" placeholder="Sponsored By"  {...register("sponsored_by")} required />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="authored_by">
+                                    <Form.Label>AUTHORED BY</Form.Label>
+                                    <Form.Control className='custom-textbox' type="text" placeholder="Authored By" {...register("authored_by")} required />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="certified">
+                                    <Form.Label>CERTIFIED BY</Form.Label>
+                                    <Form.Control className='custom-textbox' type="text" placeholder="Certified  By" {...register("certified_by")}  required />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="attested">
+                                    <Form.Label>ATTESTED BY</Form.Label>
+                                    <Form.Control className='custom-textbox' type="text" placeholder="Attested By" {...register("attested_by")} required />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="Approved By">
+                                    <Form.Label>APPROVED BY</Form.Label>
+                                    <Form.Control className='custom-textbox' type="text" placeholder="Approved By" {...register("approved_by")} required />
+                                </Form.Group>
+
+                            </Col>
+                            <Col>
+
+                                <Form.Group className="mb-3" controlId="date_adopted">
+                                    <Form.Label>DATE Adopted</Form.Label>
+                                    <Form.Control type="text" className='custom-textbox' placeholder="Date Adopted"  {...register("date_adopted")} required />
+                                </Form.Group>
+                                
+                                <Form.Group className="mb-3" controlId="date_approved">
+                                    <Form.Label>DATE APPROVED</Form.Label>
+                                    <Form.Control type="text" className='custom-textbox' placeholder="Date Approved" {...register("date_approved")} />
+                                </Form.Group>
+
+                                <Form.Group style={{'display':'none'}} className="mb-3" controlId="id">
+                                    <Form.Label>Id</Form.Label>
+                                    <Form.Control type="text" placeholder="Date Approved" {...register("id")} />
+                                </Form.Group>
+
+                            </Col>
+                        </Row>
+                        <br />
+                        <br />
+                        <Row>
+                            <Button className='custom-button'  type="submit" variant="success">Submit</Button>
+                        </Row>
+                    </form>
+                </div>
+                
             </Container>
            
         </div>

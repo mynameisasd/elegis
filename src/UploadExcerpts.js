@@ -40,22 +40,24 @@ const UploadExcerpts = () => {
 
 
     return (
-        <div>
+        <div>   
             <GlobalNavigation />
             <Container>
-                <h1>Reference Number: {reference_number}</h1>
-                <br/>
-                <Row>
-                    <Col>
-                    <Form.Group controlId="formFile" className="mb-3">
-                        <Form.Label>Upload PDF File</Form.Label>
-                        <Form.Control type="file" onChange={hanldeUpload} />
-                    </Form.Group>
-                    <br/>
+                <div className='custom-shadow' style={{padding:'15px', textAlign:'left'}}> 
+                    <h2>Reference Number: {reference_number}</h2>
+                    <hr/>
+                    <Row>
+                        <Col>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>UPLOAD FILE</Form.Label>
+                            <Form.Control className='custom-textbox' type="file" onChange={hanldeUpload} />
+                        </Form.Group>
+                        <br/>
 
-                    <Button onClick={upload} variant="success" size="sm">UPLOAD</Button>
-                    </Col>
-                </Row>
+                        <Button className='custom-button' onClick={upload} variant="success" size="sm">UPLOAD</Button>
+                        </Col>
+                    </Row>
+                </div>
             </Container>
         </div>
     )

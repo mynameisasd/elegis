@@ -64,31 +64,33 @@ const DTSReferral = () => {
         <div>
             <GlobalNavigation />
             
-            <h1>Referral</h1>
-            <br/>
-            <br/>
-            <h3>DTS No.: {dts}</h3>
-            <br/>
+            
             <Container>
-                <Row>
+                <div className='custom-shadow' style={{padding:'15px', textAlign:'left'}}>
+                    <h2>Referral</h2>
+                    <h6>DTS No.: {dts}</h6>
+                    <hr/>
+                    <Row>
                     <Col>
+                            <Select 
+                                className='custom-textbox'
+                                options={committee} 
+                                isMulti
+                                onChange={handleCommittee}
+                            />
+                            <br />
+                            <Form.Group className="mb-3" controlId="location">
+                                    <Form.Label>DATE REFERRED</Form.Label>
+                                    <Form.Control className='custom-textbox' type="date"  placeholder="Date Referred" onChange={(e)=> setDateReferred(e.target.value)} required />
+                                </Form.Group>
 
-                        <Select 
-                            options={committee} 
-                            isMulti
-                            onChange={handleCommittee}
-                        />
-                        <br />
+                            <br />
+                            <Button className='custom-button' variant="success" onClick={onSubmit} size="sm">Submit</Button>
+                        </Col>
+                    </Row>
 
-                        <Form.Group className="mb-3" controlId="location">
-                                <Form.Label>Date Referred</Form.Label>
-                                <Form.Control type="date"  placeholder="Date Referred" onChange={(e)=> setDateReferred(e.target.value)} required />
-                            </Form.Group>
-
-                        <br />
-                        <Button  variant="success" onClick={onSubmit} size="sm">Submit</Button>
-                    </Col>
-                </Row>
+                </div>
+                
             </Container>
             
 

@@ -63,31 +63,33 @@ const DTSBulkTransfer = () => {
     return (
         <div>
             <GlobalNavigation />
-            <h1>Document Transfer</h1>
-            <br/>
-            <br/>
+            
             <Container>
                 <Row>
                     <Col md="3"></Col>
                     <Col md="6">
-                        <Form.Label>Select DTS No.</Form.Label>
-                        <Select options={searchDTS} isMulti onChange={handleSelectChange} />
-                        <br />
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <Form.Group className="mb-3" controlId="date_adopted">
-                                <Form.Label>Date Adopted</Form.Label>
-                                <Form.Control type="date" placeholder="Date Adopted" {...register("date")} required  />
-                            </Form.Group>
+                        <div className='custom-shadow' style={{padding:'15px', textAlign:'left'}}>
+                        <h1>Document Transfer</h1>
+                        <hr/>
+                            <Form.Label>DTS NO.</Form.Label>
+                            <Select className='custom-textbox' options={searchDTS} isMulti onChange={handleSelectChange} />
+                            <br />
+                            
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <Form.Group className="mb-3" controlId="date_adopted">
+                                    <Form.Label>DATE</Form.Label>
+                                    <Form.Control  className='custom-textbox' type="date" placeholder="Date Adopted" {...register("date")} required  />
+                                </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="date_adopted">
-                                <Form.Label>Transfer By</Form.Label>
-                                <Form.Control type="text" placeholder="Transfer By"  {...register("transfer_by")} required />
-                            </Form.Group>
+                                <Form.Group className="mb-3" controlId="date_adopted">
+                                    <Form.Control className='custom-textbox' type="text" placeholder="Transfer By"  {...register("transfer_by")} required />
+                                </Form.Group>
 
-                            <br/>
-                            <br/>
-                            <Button type='submit' variant="success" size="sm" >Submit</Button>
-                        </form>
+                                <br/>
+                                <br/>
+                                <Button className="custom-button" type='submit' variant="success" size="sm" >Submit</Button>
+                            </form>
+                        </div>
                     </Col>
                     <Col md="3"></Col>
                 </Row>

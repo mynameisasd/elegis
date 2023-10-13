@@ -100,18 +100,18 @@ const TransferExcerpts = () => {
             <GlobalNavigation />
 
             <Container>
-                <h1>Transfer Excerpts</h1>
+                <h1>TRANSFER EXCERPTS</h1>
                 <br/>
                 <br/>
 
                 <Row>
                     <Col md="6">
-                        <Card>
+                        <Card className='custom-shadow' style={{border:'none', 'text-align':'left', borderRadius:'0'}}>
                             <Card.Body>
                             <h2>Choose to transmit:</h2>
                             <hr />
-                            <Form.Label>Excerpt Year</Form.Label>
-                            <Form.Select aria-label="Default select example"  onChange={handleYearChange} >
+                            <Form.Label>EXCERPT YEAR:</Form.Label>
+                            <Form.Select className='custom-textbox' aria-label="Default select example"  onChange={handleYearChange} >
                                 {
                                     year.map((info, index) =>
                                     <option key={index} value={info['e_year']}>{info['e_year']}</option>
@@ -120,8 +120,9 @@ const TransferExcerpts = () => {
                             </Form.Select>
                             <br />
                             <br />  
-                            Reference No.:
+                            REFERENCE NO.:
                             <Select
+                                className='custom-textbox'
                                 closeMenuOnSelect={false}
                                 components={animatedComponents}
                                 isSearchable={true}
@@ -134,39 +135,39 @@ const TransferExcerpts = () => {
                         </Card>
                     </Col>
                     <Col md="6">
-                    <Card>
+                    <Card className='custom-shadow' style={{border: "none", textAlign:'left', borderRadius:'0'}}>
                         <Card.Body>
                             <h2>Transmit to:  </h2>
                             <hr />
                             <form onSubmit={handleSubmit(onSubmit)}>
 
-                                <Form.Label>To</Form.Label> 
-                                <Form.Select aria-label="Default select example"  {...register("transfer_to")} >
+                                <Form.Label>TO</Form.Label> 
+                                <Form.Select className='custom-textbox' aria-label="Default select example"  {...register("transfer_to")} >
                                     <option value="mayors">Mayors Office</option>
                                     <option value="records">Records Office</option>
                                 </Form.Select>
                                 <br />
                                 <Form.Group className="mb-3" controlId="date_adopted">
-                                    <Form.Label>Date</Form.Label>
-                                    <Form.Control type="date" placeholder="Date Adopted" {...register("date")}  required />
+                                    <Form.Label>DATE</Form.Label>
+                                    <Form.Control className='custom-textbox' type="date" placeholder="Date Adopted" {...register("date")}  required />
                                 </Form.Group>
                                 <br />
 
-                                <Form.Label>Transfer By</Form.Label> 
-                                <Form.Select aria-label="Default select example"  {...register("transfer_by")} >
+                                <Form.Label>TRANSFER BY</Form.Label> 
+                                <Form.Select className='custom-textbox' aria-label="Default select example"  {...register("transfer_by")} >
                                     <option value="Antonia A. Gonzales">Antonia A. Gonzales</option>
                                     <option value="Mark Lawrence H. Pleyo">Mark Lawrence H. Pleyto</option>
                                     <option value="Sharmain C. Tojon">Sharmaine C. Tojon</option>
                                 </Form.Select>
                                 <br />
 
-                                <Form.Label>Type</Form.Label> 
-                                <Form.Select aria-label="Default select example"  {...register("type")} >
+                                <Form.Label>TYPE</Form.Label> 
+                                <Form.Select className='custom-textbox' aria-label="Default select example"  {...register("type")} >
                                     <option value="original copy">Original Copy</option>
                                     <option value="e-copy">E-Copy</option>
                                 </Form.Select>
                                 <br />
-                                <Button variant='success' type="submit">
+                                <Button className='custom-button' variant='success' type="submit">
                                     Submit
                                 </Button>
                             </form>

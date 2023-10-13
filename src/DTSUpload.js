@@ -49,24 +49,26 @@ const DTSUpload = () => {
             <GlobalNavigation/>
             <br/>
             <Container>
-                <h1>DTS: {dts}</h1>
-                <br/>
-                <Row>
-                    <Col>
-                    <Form.Group controlId="formFile" className="mb-3">
-                        <Form.Label>Upload PDF File</Form.Label>
-                        <Form.Control type="file" onChange={hanldeUpload} />
-                    </Form.Group>
-                    <br/>
-                    {
-                        !loader ?  <Button onClick={upload} variant="success" size="sm">UPLOAD</Button>
-                        : <Spinner animation="border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
-                    }
-                   
-                    </Col>
-                </Row>
+               <div className='custom-shadow' style={{padding:'15px', textAlign:'left'}}>
+                    <h1>DTS: {dts}</h1>
+                    <hr/>
+                    <Row>
+                        <Col>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>UPLOAD FILE</Form.Label>
+                            <Form.Control className='custom-textbox' type="file" onChange={hanldeUpload} />
+                        </Form.Group>
+                        <br/>
+                        {
+                            !loader ?  <Button className='custom-button' onClick={upload} variant="success" size="sm">UPLOAD</Button>
+                            : <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        }
+                    
+                        </Col>
+                    </Row>
+               </div>
             </Container>
         </div>
     )

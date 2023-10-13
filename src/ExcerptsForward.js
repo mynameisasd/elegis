@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import axios from 'axios'
 import { useContext } from 'react'
 import { ApiContext } from './App'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import Cookies from 'universal-cookie'
 import { useForm } from 'react-hook-form'
@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form'
 const ExcerptsForward = () => {
 
     const api = useContext(ApiContext)
+    const navigate = useNavigate()
     const {id} = useParams()
     const cookies = new Cookies()
     const { register, handleSubmit, setValue , formState: { errors } } = useForm();
@@ -39,6 +40,7 @@ const ExcerptsForward = () => {
         .then(function (response) {
     
             console.log(response.data)
+            navigate("/excerpts")
            
 
         })
@@ -51,39 +53,38 @@ const ExcerptsForward = () => {
         <Container>
              <h1 className="excerpts-metadata-title">FORWARD EXCERPT</h1>
             <Row style={{'text-align':'left'}}>
+                <Col md="3"> </Col>
                 <Col md='6'>
                     <br/>
-                    <Form onSubmit={handleSubmit(onSubmit)}>
+                    <div className='custom-shadow' style={{'padding':'15px', }}>
+                        <Form onSubmit={handleSubmit(onSubmit)}>
 
                         <Form.Group className="mb-3" style={{'display':'none'}}>
                             <Form.Label>Excerpt ID:</Form.Label>
-                            <Form.Control type="date"  {...register("excerpt_id") }  />
+                            <Form.Control className='custom-textbox' type="date"  {...register("excerpt_id") }  />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Date:</Form.Label>
-                            <Form.Control type="date"  {...register("date") } />
+                            <Form.Label>DATE:</Form.Label>
+                            <Form.Control className='custom-textbox' placeholder='Date' type="date"  required {...register("date") } />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Forwarded to:</Form.Label>
-                            <Form.Control type="text"  {...register("forwarded_to") } />
+                            <Form.Control className='custom-textbox' placeholder='Forwarded to' required type="text"  {...register("forwarded_to") } />
                         </Form.Group>
 
-                        <Form.Label>Type:</Form.Label>
-                        <Form.Select aria-label="Default select example" {...register("type") }>
+                        <Form.Label>TYPE:</Form.Label>
+                        <Form.Select className='custom-textbox' aria-label="Default select example" {...register("type") }>
                             <option value="E-copy">E-copy</option>
                             <option value="Original">Original</option>
                         </Form.Select>
                         <br/>
                         <Form.Group className="mb-3">
-                            <Form.Label>Number of Copy:</Form.Label>
-                            <Form.Control type="number"  {...register("number_of_copy") } />
+                            <Form.Control className='custom-textbox'  placeholder='Number of copy' type="number" required  {...register("number_of_copy") } />
                         </Form.Group>   
-                        
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Remarks/Reason:</Form.Label>
-                            <Form.Control as="textarea" rows={3} {...register("reason") } />
+                            <Form.Control placeholder='Remarks/Reason' className='custom-textbox' as="textarea" rows={3} {...register("reason") } />
                         </Form.Group>
 
                         <Form.Group className="mb-3" style={{'display':'none'}}>
@@ -93,11 +94,12 @@ const ExcerptsForward = () => {
 
                         <br/>
 
-                        <Button style={{width:'100%'}} type="submit" variant="success" >SUBMIT</Button>
+                        <Button className='custom-button' style={{width:'100%'}} type="submit" variant="success" >SUBMIT</Button>
 
-                    </Form>
-
+                        </Form>
+                    </div>
                 </Col>
+                <Col md="3"> </Col>
             </Row>
 
         </Container>

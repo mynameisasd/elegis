@@ -62,17 +62,17 @@ const AddExcerpts = () => {
     return (
         <div>
             <GlobalNavigation />
-            <br />
             <Container style={{margin: '0 auto', background:'white', padding: '15px'}}>
+
+                <form onSubmit={handleSubmit(onSubmit)} style={{textAlign:'left', padding:'15px'}} className='custom-shadow' > 
 
                 <Row>
                     <Col>
                         <h4 className='text-left'> RESOLUTIONS/ORDINANCES / <span style={{color:'red'}}>ADD EXCERPTS</span></h4>
                      </Col>
                 </Row>
+                
                 <hr/>
-
-                <form onSubmit={handleSubmit(onSubmit)} style={{textAlign:'left'}}>  
                 <br />
                     <Row>
                         <Col md="4">

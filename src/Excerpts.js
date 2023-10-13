@@ -26,9 +26,9 @@ const columns = [
                 <div style={{'text-align':'left'}}>
                     <span className='excerpts-action'>ACTIONS:</span>
                 </div>
-                <Button style={{'width':'100%', 'margin-bottom' :'5px', 'font-size':'12px', 'text-align':'left' , 'border-radius':'0' }} variant="success" size="sm"><Link  className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }> < FiUpload/> UPLOAD</Link></Button>
+                <Button style={{'width':'100%', 'margin-bottom' :'5px', 'font-size':'12px', 'text-align':'left' , 'border-radius':'0' }} variant="success" size="sm"><Link  className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }>< FiUpload/></Link></Button>
                 <br/>   
-                <Button style={{'width':'100%', 'font-size':'12px', 'text-align':'left', 'border-radius':'0' }} variant="info" size="sm" ><Link  className='link-style' to={"/edit_excerpts/" + row.e_id }><FiEdit3 /> EDIT</Link></Button>
+                <Button style={{'width':'100%', 'font-size':'12px', 'text-align':'left', 'border-radius':'0' }} variant="info" size="sm" ><Link  className='link-style' to={"/edit_excerpts/" + row.e_id }><FiEdit3 /></Link></Button>
                 <br/> 
                 <br />  
             </div>
