@@ -10,37 +10,27 @@ import Spinner from 'react-bootstrap/Spinner';
 import Footer from './global_components/Footer';
 import { AiFillFilePdf } from "react-icons/ai";
 import { FiEdit3, FiUpload } from "react-icons/fi";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 
 
 const columns = [
     {
-        name: 'REFERENCE NO.',
-        cell: (row) => (
-            <div>
-                <div  className='excerpts-ref-number'>
-                    <Link target="_blank" to={"/excerpts_metadata/" + row.e_id} >{row.e_referenceNumber}</Link>
-                </div>
-
-                <div style={{'text-align':'left'}}>
-                    <span className='excerpts-action'>ACTIONS:</span>
-                </div>
-                <Button style={{'width':'100%', 'margin-bottom' :'5px', 'font-size':'12px', 'text-align':'left' , 'border-radius':'0' }} variant="success" size="sm"><Link  className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }>< FiUpload/></Link></Button>
-                <br/>   
-                <Button style={{'width':'100%', 'font-size':'12px', 'text-align':'left', 'border-radius':'0' }} variant="info" size="sm" ><Link  className='link-style' to={"/edit_excerpts/" + row.e_id }><FiEdit3 /></Link></Button>
-                <br/> 
-                <br />  
-            </div>
-        ),
-        sortable: true,
-        width:'150px'
-    },
-    {
         name: 'TITLE',
-        selector: row => row.e_title ,
+        selector: row => <div>
+            <br />
+            <Button size='sm' variant="primary">
+                <Link style={{'font-weight':'bolder', 'color':'white'}} target="_blank" to={"/excerpts_metadata/" + row.e_id} >{row.e_referenceNumber}</Link>
+            </Button>
+            <br/>
+            <br/>
+            {row.e_title }
+            <br />
+            <br />
+        </div> ,
         sortable: true,
-        width:'700px',
+        
         wrap:true,
         style:{'text-align':'justify'}
        
@@ -68,6 +58,41 @@ const columns = [
         cell : (row) => (<a href={'http://192.168.0.106/excerpts/upload/' + row.e_fileLink} target="_blank">{row.e_fileLink}</a> ),
         sortable: true,
         width:'100px'
+    },
+    {
+        name: 'Actions',
+        selector : row => <div>
+                    {/* <Dropdown>
+                        <Dropdown.Toggle size='sm' className='excerpts-actions' variant="success" id="dropdown-basic">
+                        Actions
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu className='text-right'>
+                            <Dropdown.Item href="#/action-1">sad</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">sad</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown> */}
+                    <div style={{
+                                    display:'flex',
+                                    justifyContent:'center',
+                                    alignItems:'center'
+                                }}>
+                        <div>
+                        <Button variant='success' size='sm' >
+                            <Link   className='link-style' to={"/upload_excerpts/" + row.e_id + "/" + row.e_referenceNumber }>< FiUpload style={{color:'white'}} /></Link>
+                        </Button>
+                        </div>
+                        |
+                        <div>
+                        <Button variant='success' size='sm' >
+                            <Link  className='link-style' to={"/edit_excerpts/" + row.e_id }><FiEdit3 style={{color:'white'}} /></Link>
+                        </Button>
+                        </div>
+                    </div>
+
+                </div>,
+        sortable: true,
+        wrap: true,
+        width:'150px' 
     },
    
 ];
@@ -149,6 +174,7 @@ const Excerpts = () => {
 
             <br />
             <Container >
+                
                 <div className='excerpts_search custom-shadow'>
                     <h4 className='text-left'> <AiFillFilePdf style={{color:'red'}} /> RESOLUTIONS/ORDINANCES ARCHIVE</h4>
                     <hr />

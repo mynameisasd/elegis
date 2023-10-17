@@ -7,6 +7,7 @@ import { BsFillArchiveFill, BsFillForwardFill, BsCardList } from 'react-icons/bs
 import { ApiContext } from '../App';
 import Cookies from 'universal-cookie/cjs/Cookies';
 import { useEffect } from 'react';
+import { AiOutlineUser } from "react-icons/ai";
 
 const GlobalNavigation = () => {
     const cookies = new Cookies()
@@ -62,10 +63,10 @@ const GlobalNavigation = () => {
                     
                 </NavDropdown>
                 <NavDropdown title="Document Tracking" id="navbarScrollingDropdown">
-                    <NavDropdown.Item href="#action3">
+                    {/* <NavDropdown.Item href="#action3">
                         <Link className='color-white' to="/dts_add_temp">Add Temporary</Link>
                     </NavDropdown.Item>
-                    <NavDropdown.Divider />
+                    <NavDropdown.Divider /> */}
                     <NavDropdown.Item href="#action3">
                         <Link className='color-white' to="/dts_add">Add < AiFillFileAdd style={{'font-size':'20px', 'float':'right', 'color':'black'}} /></Link>
                     </NavDropdown.Item>
@@ -80,10 +81,11 @@ const GlobalNavigation = () => {
                 </NavDropdown>
                 </Nav>
                 <Row>
-                    <Col>
+                    <Col style={{'text-align':'right'}}>
                         <div>
-                            <img style={{'width':'50px'}} alt="iconuser" src="https://tcrf.net/images/3/39/RO-unused-hairanimation-swordsman-m-attack1.gif" />
-                            <small><strong>Hi!  {userFullName}</strong></small>
+                            {/* <img style={{'width':'50px'}} alt="iconuser" src="https://tcrf.net/images/3/39/RO-unused-hairanimation-swordsman-m-attack1.gif" /> */}
+                            <AiOutlineUser className='user-icon' /> 
+                            <small style={{'padding':'5px 0px 5px 5px'}}><strong style={{'padding':'0'}}>{userFullName}</strong></small>
                         </div>
                         <Button size="sm" variant="danger" onClick={logout} >LOGOUT</Button>
                     </Col>
